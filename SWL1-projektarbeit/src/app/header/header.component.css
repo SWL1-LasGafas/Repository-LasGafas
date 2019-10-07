@@ -1,0 +1,16 @@
+.headerarea {
+    position:absolute;
+    right:20px;
+    top:20px;
+    left:20px;
+    min-height:150px;
+    background-color:rgb(42, 60, 158);
+}
+.topright {
+    position:absolute;
+    right:20px;
+    top:20px;
+    min-height: 100px;
+    padding:5px;
+    background-color:#ffffff;
+}
