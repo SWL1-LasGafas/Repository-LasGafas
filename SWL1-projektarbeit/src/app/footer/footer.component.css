@@ -1,0 +1,8 @@
+.footerarea {
+    position:absolute;
+    top:90%;
+    left:20px;
+    right:20px;
+    min-height:100px;
+    background-color:#A0A0A0;
+}
