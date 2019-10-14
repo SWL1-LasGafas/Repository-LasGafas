@@ -1,11 +1,15 @@
 .headerarea {
     position:absolute;
     right:20px;
-    top:20px;
-    left:20px;
-    min-height:150px;
-    background-color:rgb(42, 79, 158);
+    top:15px;
+    left:40px;
+    min-height:75px;
+    max-width: 78%;
+    background-color:rgb(43, 87, 184);
     text-align: center;
+    font-family: 'Roboto Mono', monospace, sans-serif;
+    color: rgb(158, 158, 158);
+    font-size: 55px;
 }
 .logo {
     position:absolute;
