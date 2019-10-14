@@ -1,4 +1,4 @@
 Projekt für das SWL1 an der FHSG HS 2019
 
 1. Testeintrag für ersten push
-2. Testeintrag von Raphael für Verbindung zu Repo
+
