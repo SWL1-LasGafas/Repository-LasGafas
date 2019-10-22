@@ -1,3 +1,36 @@
 <div class="mainarea">
-    <p>main works!</p>
+    <div class="row">
+        <div class="col-12">
+            Eingabebereich<br />
+            <br />
+            <br />
+            {{myVariable}}<br />
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <textarea maxlength="1000" [(ngModel)]="myVariable" (enter)="myVariable=''" (change)=mirror_text()>{{myVariable}}</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input type="submit" name="submit" value="Absenden" (click)="sendChat()"/><br/>
+            <br/>
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Chatausgabe<br/>
+            <br/>
+            {{postings}}<br/>
+        </div>
+    </div>
+    
 </div>
