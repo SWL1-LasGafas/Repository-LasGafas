@@ -4,8 +4,9 @@
     top:15px;
     left:40px;
     min-height:75px;
-    max-width: 78%;
-    background-color:rgb(43, 87, 184);
+    max-width: 60%;
+    float: left;
+    background-color:rgb(0, 102, 185);
     text-align: center;
     font-family: 'Roboto Mono', monospace, sans-serif;
     color: rgb(158, 158, 158);
