@@ -3,7 +3,7 @@
 
 <div class="mainarea">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12" style="white-space: pre-line">
             Chatausgabe<br />
             <br />
             {{postings}}<br />
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-12">
             <!-- hier müsste noch eingebaut werden, dass sich der Standardtext beim Klicken ins Fenster selber löscht. (enter) klappt nicht. -->
-            <textarea maxlength="1000" [(ngModel)]="chatText" (enter)="chatText=''"
+            <textarea maxlength="1000" cols=60 [(ngModel)]="chatText" (enter)="chatText=''"
                 (change)=mirror_text()>{{chatText}}</textarea>
         </div>
     </div>

@@ -11,7 +11,7 @@ export class MainComponent implements OnInit {
 
   chatText = 'Schreiben Sie hier Ihren Text.';
   postings = '';
-  newline = "\n\r";
+  newline = "\n";
 
   ngOnInit() {
   }
