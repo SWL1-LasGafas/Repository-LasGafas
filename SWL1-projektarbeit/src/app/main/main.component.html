@@ -4,7 +4,7 @@
 <div class="mainarea">
     <div class="row">
         <div class="col-12" style="white-space: pre-line">
-            Provisorische Chatausgabe<br />
+            <h1 id="ChatAusgabe">Provisorische Chatausgabe</h1><br />
             <br />
             {{postings}}<br />
             <br />
@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            Eingabebereich<br />
+            <p id="Eingabebereich">Eingabebereich</p><br />
             <br />
             <br />
             {{chatText}}<br />
@@ -22,7 +22,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <!-- hier müsste noch eingebaut werden, dass sich der Standardtext beim Klicken ins Fenster selber löscht. (enter) klappt nicht. -->
+            <!-- hier müsste noch eingebaut werden, dass sich der Standardtext beim Klicken ins Fenster selber löscht. (enter) klappt nicht.  -->
             <textarea maxlength="1000" cols=60 [(ngModel)]="chatText" (enter)="chatText=''"
                 (change)=mirror_text()>{{chatText}}</textarea>
         </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <input type="submit" name="submit" value="Absenden" (click)="sendChat()" /><br />
+            <button type="button" class="btn btn-secondary btn-large" type="submit" name="submit" value="Absenden" (click)="sendChat()" >Absenden</button><br />
             <br />
             <br />
         </div>

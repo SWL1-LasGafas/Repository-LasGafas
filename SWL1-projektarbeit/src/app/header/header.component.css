@@ -1,10 +1,14 @@
 .headerarea {
     position:absolute;
     right:20px;
-    top:15px;
+    top:20px;
     left:40px;
-    min-height:75px;
+    bottom: 100px;
+
+    height: 80px;
+    max-height:10%;
     max-width: 60%;
+
     float: left;
     background-color:rgb(0, 102, 185);
     text-align: center;
@@ -16,8 +20,12 @@
     position:absolute;
     right:20px;
     top:20px;
+
     width: 270px;
-    height: 75px;
+    height: 80px;
+    max-width: 35%;
+    max-height: 10%;
+
     border-left-width: 10px;
     border-left-color: white;
     border-left-style: solid;
