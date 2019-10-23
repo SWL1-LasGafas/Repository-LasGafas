@@ -9,7 +9,7 @@ export class MainComponent implements OnInit {
 
   constructor() { }
 
-  myVariable = 'Schreibe einen Text...';
+  chatText = 'Schreiben Sie hier Ihren Text.';
   postings = '';
   newline = "\n\r";
 
@@ -19,10 +19,11 @@ export class MainComponent implements OnInit {
 
   mirror_text() {
     // console.log("typed \n");
+    // Diese Funktion scheint es nicht zu brauchen. Das Spiegeln macht ngModel selbst
   }
 
   sendChat() {
-    this.postings=this.postings+this.myVariable+this.newline;
-    alert('Versendet!');
+    this.postings=this.postings+this.chatText+this.newline;
+    alert('Nachricht erfolgreich versendet!');
   }
 }

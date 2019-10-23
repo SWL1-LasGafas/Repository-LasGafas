@@ -6,13 +6,14 @@
             Eingabebereich<br />
             <br />
             <br />
-            {{myVariable}}<br />
+            {{chatText}}<br />
             <br />
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <textarea maxlength="1000" [(ngModel)]="myVariable" (enter)="myVariable=''" (change)=mirror_text()>{{myVariable}}</textarea>
+            <!-- hier müsste noch eingebaut werden, dass sich der Standardtext beim Klicken ins Fenster selber löscht. (enter) klappt nicht. -->
+            <textarea maxlength="1000" [(ngModel)]="chatText" (enter)="chatText=''" (change)=mirror_text()>{{chatText}}</textarea>
         </div>
     </div>
     <div class="row">
