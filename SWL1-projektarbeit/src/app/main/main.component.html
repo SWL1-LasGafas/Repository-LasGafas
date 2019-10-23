@@ -1,6 +1,16 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <div class="mainarea">
+    <div class="row">
+        <div class="col-12">
+            Chatausgabe<br />
+            <br />
+            {{postings}}<br />
+            <br />
+            <br />
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             Eingabebereich<br />
@@ -13,7 +23,8 @@
     <div class="row">
         <div class="col-12">
             <!-- hier müsste noch eingebaut werden, dass sich der Standardtext beim Klicken ins Fenster selber löscht. (enter) klappt nicht. -->
-            <textarea maxlength="1000" [(ngModel)]="chatText" (enter)="chatText=''" (change)=mirror_text()>{{chatText}}</textarea>
+            <textarea maxlength="1000" [(ngModel)]="chatText" (enter)="chatText=''"
+                (change)=mirror_text()>{{chatText}}</textarea>
         </div>
     </div>
     <div class="row">
@@ -23,17 +34,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <input type="submit" name="submit" value="Absenden" (click)="sendChat()"/><br/>
-            <br/>
-            <br/>
+            <input type="submit" name="submit" value="Absenden" (click)="sendChat()" /><br />
+            <br />
+            <br />
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            Chatausgabe<br/>
-            <br/>
-            {{postings}}<br/>
-        </div>
-    </div>
-    
+
 </div>
