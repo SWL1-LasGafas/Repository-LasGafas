@@ -3,6 +3,8 @@
     top:120px;
     left:20px;
     right:20px;
+    bottom: 15%;
+
     min-width: 50%;
     max-width: 60%;
     min-height: 50%;
@@ -14,15 +16,17 @@
     border: 5px solid rgb(0, 102, 185);
 }
 
-#ChatAusgabe {
+
+
+#chatausgabe {
     color: grey;
     font-size: 25px;
 }
 
-#Eingabebereich {
+#eingabebereich {
     color: black;
     font-size: 15px;
-
+    
     border-bottom: 2px solid grey;
 }
 
