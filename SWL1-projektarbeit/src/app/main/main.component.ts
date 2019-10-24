@@ -9,7 +9,7 @@ export class MainComponent implements OnInit {
 
   constructor() { }
 
-  chatText = 'Schreiben Sie hier Ihren Text.';
+  chatText = '';
   postings = '';
   newline = "\n";
 
@@ -25,6 +25,6 @@ export class MainComponent implements OnInit {
   sendChat() {
     this.postings=this.postings+this.chatText+this.newline;
     alert('Nachricht erfolgreich versendet!');
-    this.chatText = 'Schreiben Sie hier Ihren Text.';
+    this.chatText = '';
   }
 }
