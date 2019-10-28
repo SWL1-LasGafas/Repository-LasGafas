@@ -1,0 +1,44 @@
+.chatbar {
+    position:absolute;
+    top:120px;
+    left:20px;
+    right:20px;
+    bottom: 15%;
+
+    min-width: 50%;
+    max-width: 60%;
+    min-height: 50%;
+
+    margin: auto;
+    padding: 5px;
+       
+    color: black;
+    border: 5px solid rgb(0, 102, 185);
+}
+
+
+
+#chatausgabe {
+    color: grey;
+    font-size: 25px;
+}
+
+#eingabebereich {
+    color: black;
+    font-size: 15px;
+    
+    border-bottom: 2px solid grey;
+}
+
+
+.area1 {
+    background-color:#00BFFF;
+}
+
+.area2 {
+    background-color:#00639e;
+}
+
+.area3 {
+    background-color:#FFFFFF;
+}
