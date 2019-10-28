@@ -1,9 +1,5 @@
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-
-<div class="mainarea">
-    <app-chat-bar></app-chat-bar>
-<!--
+chat-bar<br/>
+<div class="chatarea">
     <div class="row">
         <div class="col-12" style="white-space: pre-line">
             <h1 id="chatausgabe">Provisorische Chatausgabe</h1><br />
@@ -26,8 +22,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <textarea maxlength="1000" cols=60 [(ngModel)]="chatText" placeholder="Schreiben Sie hier Ihren Text." 
-                (change)=mirror_text()></textarea>
+            <textarea maxlength="1000" cols=60 [(ngModel)]="chatText" placeholder="Schreiben Sie hier Ihren Text." (keyup.enter)="sendChat()" (change)=mirror_text()></textarea>
         </div>
     </div>
     <div class="row">
@@ -37,10 +32,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <button type="button" class="btn btn-secondary btn-large" type="submit" name="submit" value="Absenden" (click)="sendChat()" >Absenden</button><br />
+            <button type="button" class="btn btn-secondary btn-large" type="submit" name="submit" value="Absenden" (click)="sendChat()" [disabled]="!chatText">Absenden</button><br />
             <br />
             <br />
         </div>
     </div>
--->
 </div>
+/chat-bar
