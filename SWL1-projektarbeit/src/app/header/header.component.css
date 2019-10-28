@@ -1,35 +1,45 @@
 .headerarea {
-    position:absolute;
-    right:20px;
+    position:relative;
+    right:2%;
     top:20px;
-    left:40px;
+    left: 1%;
     bottom: 100px;
-
-    height: 80px;
-    max-height:10%;
-    max-width: 60%;
-
-    float: left;
-    
-    text-align: center;
-    font-family: 'Fjalla One', monospace, sans-serif;
-    color: rgb(158, 158, 158);
-    font-size: 70px;
-}
-.logo {
-    position:absolute;
-    right:20px;
-    top:20px;
 
     width: 270px;
     height: 80px;
-    max-width: 35%;
-    max-height: 10%;
+    min-width: 30%;
+    min-height:10%;
+    
 
+    float: left;
+    
+    text-align: left;
+    font-family: 'Fjalla One', monospace, sans-serif;
+    color: rgb(158, 158, 158);
+    font-size: 15%;
+
+    padding: 2%;
+    
+    border: 5px solid red;
+}
+.logo {
+    
+    position:relative;
+    right: 20px;
+    top:20px;
+    
+    width: 255px !important;
+    height: 80px !important;
+    min-width: 20% !important;
+    min-height: 10% !important;
+    
+    border: 5px dotted green;
+    
     border-left-width: 10px;
     border-left-color: white;
     border-left-style: solid;
     background-color:#ffffff;
+    
     background-image: url("images/fhs-logo-de.svg");
     background-repeat: no-repeat;
 }
