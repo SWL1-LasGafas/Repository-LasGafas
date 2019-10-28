@@ -1,23 +1,22 @@
+#header {
+    border-bottom: 5px solid grey;
+}
+
 .headerarea {
     position:fixed;
     top:20px;
-    left: 20px;
+    left: 10px;
     
 
-    width: 270px;
+    width: 255px;
     height: 80px;
     min-width: 30%;
     min-height:10%;
-    
-
-    float: left;
-    
-    text-align: left;
+       
+    text-align: center;
     font-family: 'Fjalla One', monospace, sans-serif;
     color: rgb(158, 158, 158);
-    font-size: 15%;
-
-    padding: 2%;
+    font-size: 12%;
     
     border: 5px solid red;
 }
@@ -33,6 +32,8 @@
     min-height: 10% !important;
     
     border: 5px dotted green;
+
+    /*
     
     border-left-width: 10px;
     border-left-color: white;
@@ -42,4 +43,6 @@
     background-image: url("images/fhs-logo-de.svg");
     background-repeat: no-repeat;
     background-size: 1255px 800px;
+
+    */
 }
