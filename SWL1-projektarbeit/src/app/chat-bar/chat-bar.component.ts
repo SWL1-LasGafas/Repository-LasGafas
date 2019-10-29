@@ -11,7 +11,7 @@ export class ChatBarComponent implements OnInit {
 
   chatText:string = '';
   postings = '';
-  newline = "";
+  newline = "\n";
 
   ngOnInit() {
   }
@@ -38,6 +38,6 @@ export class ChatBarComponent implements OnInit {
     this.postings=this.postings+this.chatText+this.newline;
     alert('Nachricht erfolgreich versendet! '+this.chatMessage);
     this.chatMessage = this.postings;
-    this.chatText = '';
+    this.chatText = ''; // Hat keine Wirkung mehr
   }
 }

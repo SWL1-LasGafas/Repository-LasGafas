@@ -3,10 +3,12 @@
 
 <div class="mainarea">
     <app-chat-bar [(chatMessage)]="messageText" (chatMessageChange)="chatMsg($event)"></app-chat-bar>
-    <app-chat-history [chatHistory]="messageText"></app-chat-history>
+    <app-chat-history [(chatHistory)]="historyText"></app-chat-history>
+<!--    
     <div>
         In der main-Komponente: {{messageText}}
     </div>
+-->
 <!--
     <div class="row">
         <div class="col-12" style="white-space: pre-line">
