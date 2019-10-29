@@ -2,7 +2,11 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
 <div class="mainarea">
-    <app-chat-bar></app-chat-bar>
+    <app-chat-bar [(chatMessage)]="messageText" (chatMessageChange)="chatMsg($event)"></app-chat-bar>
+    <app-chat-history [chatHistory]="messageText"></app-chat-history>
+    <div>
+        In der main-Komponente: {{messageText}}
+    </div>
 <!--
     <div class="row">
         <div class="col-12" style="white-space: pre-line">

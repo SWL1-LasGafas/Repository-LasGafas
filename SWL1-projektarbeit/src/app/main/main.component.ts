@@ -12,10 +12,15 @@ export class MainComponent implements OnInit {
 //  chatText = '';
 //  postings = '';
 //  newline = "\n";
+  initialText:string="...";
+  messageText:string="...";
 
   ngOnInit() {
   }
 
+  chatMsg(event: any): void {
+    console.log(<string>event.toUpperCase());
+  }
 
 //  mirror_text() {
     // console.log("typed \n");

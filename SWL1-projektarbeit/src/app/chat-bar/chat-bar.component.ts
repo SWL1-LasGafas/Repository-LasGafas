@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-chat-bar',
@@ -9,13 +9,25 @@ export class ChatBarComponent implements OnInit {
 
   constructor() { }
 
-  chatText = '';
+  chatText:string = '';
   postings = '';
-  newline = "\n";
+  newline = "";
 
   ngOnInit() {
   }
 
+  get chatMessage(): string {
+    return this.chatText;
+  }
+
+  @Output()
+  chatMessageChange = new EventEmitter<string>();
+
+  @Input()
+  set chatMessage(value) {
+    this.chatText = value;
+    this.chatMessageChange.emit(this.chatText);
+  }
 
   mirror_text() {
     // console.log("typed \n");
@@ -24,7 +36,8 @@ export class ChatBarComponent implements OnInit {
 
   sendChat() {
     this.postings=this.postings+this.chatText+this.newline;
-    alert('Nachricht erfolgreich versendet!');
+    alert('Nachricht erfolgreich versendet! '+this.chatMessage);
+    this.chatMessage = this.postings;
     this.chatText = '';
   }
 }

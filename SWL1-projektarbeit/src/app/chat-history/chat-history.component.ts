@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-chat-history',
@@ -11,5 +11,8 @@ export class ChatHistoryComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  @Input()
+  chatHistory: string; // Hier kommt die History rein
 
 }
