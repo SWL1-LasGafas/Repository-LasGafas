@@ -16,10 +16,9 @@
     text-align: center;
     font-family: 'Fjalla One', monospace, sans-serif;
     color: rgb(158, 158, 158);
-    font-size: 12%;
-    
-    border: 5px solid red;
-}
+    font-size: 12%; 
+ }
+
 #logo {
     
     position:fixed;
@@ -31,7 +30,6 @@
     min-width: 20% !important;
     min-height: 10% !important;
     
-    border: 5px dotted green;
 
     /*
     

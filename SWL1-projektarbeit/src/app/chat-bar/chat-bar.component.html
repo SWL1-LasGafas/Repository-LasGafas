@@ -1,27 +1,33 @@
-<div class="chatarea">
-    <div class="row">
+<div id="chatarea">
+    
+    <!--<div class="row">
         <div class="col-12" style="white-space: pre-line">
             <h1 id="chatausgabe">Provisorische Chatausgabe</h1><br />
             <p>Preview: {{chatText}}</p>
-<!--             <br />
+            <br />
              <br />
              
                {{postings}}<br />
              
             <br />
             <br />
--->
+            -->
+
+<!-- 
         </div>
     </div>
+-->
     <div class="row">
         <div class="col-12">
-            <p id="eingabebereich">Eingabebereich</p><br />
+            <p id="eingabebereich">Eingabebereich</p>
             
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <textarea maxlength="1000" cols=60 [(ngModel)]="chatText" placeholder="Schreiben Sie hier Ihren Text." (keyup.enter)="sendChat()"></textarea>
+              <div id="textfeld">
+                  <textarea maxlength="1000" cols=60 [(ngModel)]="chatText" placeholder="Schreiben Sie hier Ihren Text." (keyup.enter)="sendChat()"></textarea>
+             </div>
         </div>
     </div>
     <div class="row">
@@ -31,7 +37,9 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <button type="button" class="btn btn-secondary btn-large" type="submit" name="submit" value="Absenden" (click)="sendChat()" [disabled]="!chatText">Absenden</button><br />
+                <div id="sendebutton">
+                  <button type="button" class="btn btn-secondary btn-large" type="submit" name="submit" value="Absenden" (click)="sendChat()" [disabled]="!chatText">Absenden</button><br />
+                 </div>
             <br />
             <br />
         </div>
