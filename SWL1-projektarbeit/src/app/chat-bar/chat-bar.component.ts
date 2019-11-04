@@ -10,8 +10,8 @@ export class ChatBarComponent implements OnInit {
   constructor() { }
 
   chatText:string = '';
-  postings = '';
-  newline = "\n";
+  // postings = ''; 
+  // newline = "\n";
 
   ngOnInit() {
   }
@@ -35,9 +35,9 @@ export class ChatBarComponent implements OnInit {
   }
 
   sendChat() {
-    this.postings=this.postings+this.chatText+this.newline;
+    // this.postings=this.postings+this.chatText+this.newline;  // postings wird eigentlich nicht mehr benötigt.
     alert('Nachricht erfolgreich versendet! '+this.chatMessage);
-    this.chatMessage = this.postings;
+    this.chatMessage = this.chatText; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     this.chatText = ''; // Hat keine Wirkung mehr
   }
 }

@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
 
   chatMsg(event: any): void {
     // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole grausam zuballert
-    this.historyText=<string>event;
+    this.historyText=this.historyText+<string>event;
     this.messageText="";
   }
 
