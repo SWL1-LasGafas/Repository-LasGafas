@@ -10,7 +10,7 @@ export class ChatBarComponent implements OnInit {
   constructor() { }
 
   chatText:string = '';
-  postings = '';
+  // postings = ''; 
   newline = "\n";
 
   ngOnInit() {
@@ -35,9 +35,10 @@ export class ChatBarComponent implements OnInit {
   }
 
   sendChat() {
-    this.postings=this.postings+this.chatText+this.newline;
-    alert('Nachricht erfolgreich versendet! '+this.chatMessage);
-    this.chatMessage = this.postings;
+    // this.postings=this.postings+this.chatText+this.newline;  // postings wird eigentlich nicht mehr benötigt.
+
+    // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
+    this.chatMessage = this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     this.chatText = ''; // Hat keine Wirkung mehr
   }
 }
