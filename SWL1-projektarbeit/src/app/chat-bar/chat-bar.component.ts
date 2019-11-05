@@ -12,7 +12,8 @@ export class ChatBarComponent implements OnInit {
 
   chatText:string = '';
   // postings = ''; 
-  newline = "\n";
+  newline:string = "\n";
+  public nickName:string = "";
  
   ngOnInit() {
   }
@@ -20,7 +21,7 @@ export class ChatBarComponent implements OnInit {
   get chatMessage(): string {
     return this.chatText;
   }
-
+  
   @Output()
   chatMessageChange = new EventEmitter<string>();
 
@@ -28,6 +29,10 @@ export class ChatBarComponent implements OnInit {
   set chatMessage(value) {
     this.chatText = value;
     this.chatMessageChange.emit(this.chatText);
+  }
+
+  checkNick() {
+    this.nickName = this.pService.myNickname;
   }
 
   mirror_text() {
@@ -38,8 +43,10 @@ export class ChatBarComponent implements OnInit {
   sendChat() {
     // this.postings=this.postings+this.chatText+this.newline;  // postings wird eigentlich nicht mehr benötigt.
 
+    this.nickName = this.pService.myNickname;
+
     // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
-    this.chatMessage = this.pService.myNickname+": "+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
+    this.chatMessage = this.nickName+": "+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     this.chatText = ''; // Hat keine Wirkung mehr
   }
 }

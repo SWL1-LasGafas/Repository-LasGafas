@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core'; 
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PersonService } from '../person.service';
 
 @Component({
@@ -8,16 +8,42 @@ import { PersonService } from '../person.service';
 })
 export class NickNameComponent implements OnInit {
 
-  constructor(public pService: PersonService) {  }
+  constructor(public pService: PersonService) { }
 
   ngOnInit() {
   }
 
-  nickName:string = "";
+  nickName: string = "";
+  isOK: boolean = false;
+
+  checkNickname(value: string): boolean {
+
+    if (value.length >= 4) {
+      if (value.match("^([a-z]|[A-Z]|[ä,ö,ü,Ä,Ö,Ü,ç,è,é,à])*$")) {
+        this.isOK = true;
+      }
+    }
+    else {
+      this.isOK = false;
+    }
+
+    return this.isOK;
+
+  }
+
+  @Output()
+  nickNameChange = new EventEmitter<string>();
 
   setNickname() {
-    this.pService.myNickname = this.nickName;
-    console.log("Nickname="+this.nickName);
+    if (this.checkNickname(this.nickName)) {
+      this.pService.myNickname = this.nickName;
+      console.log("Nickname=" + this.nickName);
+      this.nickNameChange.emit(this.nickName);
+    }
+    else {
+      console.log("Nickname " + this.nickName + " ungültig!");
+      alert("Nickname ungültig. Bitte nur Buchstaben verwenden!");
+    }
   }
 
 }

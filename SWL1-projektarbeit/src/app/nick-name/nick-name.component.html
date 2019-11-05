@@ -1,3 +1,4 @@
 
-Nickname: <input [(ngModel)]="nickName" type="text" id="inputNickname" size=20 (keyup.enter)="setNickname()" />&nbsp;<button type=button (click)="setNickname()" value="Setzen" [disabled]="!nickName">Setzen</button>
-
+Setzen Sie zuerst den Nickname!<br/> 
+<input [(ngModel)]="nickName" type="text" id="inputNickname" size=20 minlenght=4 maxlength="50" (keyup.enter)="setNickname()" pattern="^([a-z]|[A-Z])*$" required />&nbsp;<button type=button (click)="setNickname()" value="Setzen" [disabled]="!nickName">Setzen</button>
+<br/>

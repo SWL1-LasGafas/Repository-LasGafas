@@ -15,8 +15,14 @@ export class MainComponent implements OnInit {
   initialText:string="...";
   messageText:string="";
   historyText:string="";
+  nickSet:boolean=false;
 
   ngOnInit() {
+  }
+
+  nickChange(event: any): void {
+    console.log("Nickname Change");
+    this.nickSet=true;
   }
 
   chatMsg(event: any): void {
