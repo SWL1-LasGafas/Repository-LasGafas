@@ -61,7 +61,7 @@ export class ChatBarComponent implements OnInit {
     // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt was drin steht, natürlich
     {
-      this.chatMessage = this.nickName+": "+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
+      this.chatMessage = this.nickName+": "+this.newline+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     }
     this.chatText = '';
   }

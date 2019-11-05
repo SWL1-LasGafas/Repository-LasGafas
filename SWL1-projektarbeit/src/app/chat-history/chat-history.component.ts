@@ -12,6 +12,11 @@ export class ChatHistoryComponent implements OnInit {
   ngOnInit() {
   }
 
+  scrollTop() {
+    console.log("Scrolling down");
+    document.getElementById("historyContainer").scrollTop=document.getElementById("historyContainer").scrollHeight;
+  }
+
   @Input()
   chatHistory: string; // Hier kommt die History rein
 

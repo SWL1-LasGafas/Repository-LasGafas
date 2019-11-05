@@ -14,6 +14,11 @@ export class MainComponent implements OnInit {
   historyText:string="";
   nickSet:boolean=false;
 
+  scrollTop() {
+    console.log("Scrolling down");
+    document.getElementById("historyContainer").scrollTop=document.getElementById("historyContainer").scrollHeight;
+  }
+
   ngOnInit() {
   }
 
@@ -26,6 +31,7 @@ export class MainComponent implements OnInit {
     // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole grausam zuballert
     this.historyText=this.historyText+<string>event;
     this.messageText="";
+    this.scrollTop();
   }
 
 }
