@@ -11,7 +11,6 @@ export class ChatBarComponent implements OnInit {
   constructor(public pService: PersonService) { }
 
   chatText:string = '';
-  // postings = ''; 
   newline:string = "\n";
   public nickName:string = "";
   isOK:boolean=false;
@@ -55,13 +54,7 @@ export class ChatBarComponent implements OnInit {
     this.nickName = this.pService.myNickname;
   }
 
-  mirror_text() {
-    // console.log("typed \n");
-    // Diese Funktion scheint es nicht zu brauchen. Das Spiegeln macht ngModel selbst
-  }
-
   sendChat() {
-    // this.postings=this.postings+this.chatText+this.newline;  // postings wird eigentlich nicht mehr benötigt.
 
     this.nickName = this.pService.myNickname;
 
