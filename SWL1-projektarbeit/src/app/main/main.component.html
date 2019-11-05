@@ -3,25 +3,25 @@
 
 <div class="mainarea">
 
-        <div class="chatarea">
-                <div class="row">
-                    <div class="col-12" style="white-space: pre-line">
+    <div class="chatarea">
+        <div class="row">
+            <div class="col-12" style="white-space: pre-line">
 
-        <h1 id="chatausgabe">Provisorische Chatausgabe</h1><br />
-        
-        <app-chat-history [(chatHistory)]="historyText"></app-chat-history>
-        <app-chat-bar [(chatMessage)]="messageText" (chatMessageChange)="chatMsg($event)"></app-chat-bar>
+                <h1 id="chatausgabe">Chatausgabe</h1><br />
+                <app-chat-history [(chatHistory)]="historyText"></app-chat-history>
+                <app-chat-bar [(chatMessage)]="messageText" (chatMessageChange)="chatMsg($event)"></app-chat-bar>
+                <app-nick-name></app-nick-name>
 
-                    </div>
-                </div>
+            </div>
         </div>
-    
-<!--    
+    </div>
+
+    <!--    
     <div>
         In der main-Komponente: {{messageText}}
     </div>
 -->
-<!--
+    <!--
     <div class="row">
         <div class="col-12" style="white-space: pre-line">
             <h1 id="chatausgabe">Provisorische Chatausgabe</h1><br />
