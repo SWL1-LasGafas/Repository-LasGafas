@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core'; 
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-nick-name',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NickNameComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pService: PersonService) {  }
 
   ngOnInit() {
+  }
+
+  nickName:string = "";
+
+  setNickname() {
+    this.pService.myNickname = this.nickName;
+    console.log("Nickname="+this.nickName);
   }
 
 }

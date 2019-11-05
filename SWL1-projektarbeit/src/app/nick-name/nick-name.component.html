@@ -1,1 +1,3 @@
-<p>nick-name works!</p>
+
+Nickname: <input [(ngModel)]="nickName" type="text" id="inputNickname" size=20 (keyup.enter)="setNickname()" />&nbsp;<button type=button (click)="setNickname()" value="Setzen" [disabled]="!nickName">Setzen</button>
+

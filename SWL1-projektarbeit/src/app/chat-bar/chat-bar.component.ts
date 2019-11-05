@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-chat-bar',
@@ -7,12 +8,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ChatBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pService: PersonService) { }
 
   chatText:string = '';
   // postings = ''; 
   newline = "\n";
-
+ 
   ngOnInit() {
   }
 
@@ -38,7 +39,7 @@ export class ChatBarComponent implements OnInit {
     // this.postings=this.postings+this.chatText+this.newline;  // postings wird eigentlich nicht mehr benötigt.
 
     // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
-    this.chatMessage = this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
+    this.chatMessage = this.pService.myNickname+": "+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     this.chatText = ''; // Hat keine Wirkung mehr
   }
 }

@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-12" style="white-space: pre-line">
 
+                <app-nick-name></app-nick-name>
                 <h1 id="chatausgabe">Chatausgabe</h1><br />
                 <app-chat-history [(chatHistory)]="historyText"></app-chat-history>
                 <app-chat-bar [(chatMessage)]="messageText" (chatMessageChange)="chatMsg($event)"></app-chat-bar>
-                <app-nick-name></app-nick-name>
 
             </div>
         </div>
