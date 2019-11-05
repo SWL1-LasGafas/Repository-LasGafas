@@ -14,8 +14,22 @@ export class ChatBarComponent implements OnInit {
   // postings = ''; 
   newline:string = "\n";
   public nickName:string = "";
- 
+  isOK:boolean=false;
+
   ngOnInit() {
+  }
+
+  checkMsg(value:string):boolean {
+    console.log("checking "+value);
+    if (value.length>0)
+    {
+      this.isOK=true;
+    }
+    else
+    {
+      this.isOK=false;
+    }
+    return this.isOK;
   }
 
   get chatMessage(): string {
@@ -27,8 +41,14 @@ export class ChatBarComponent implements OnInit {
 
   @Input()
   set chatMessage(value) {
-    this.chatText = value;
-    this.chatMessageChange.emit(this.chatText);
+    if (this.checkMsg(value))
+    {
+      this.chatText = value;
+      this.chatMessageChange.emit(this.chatText);
+    }
+    else {
+      console.log("Chat-Message ungültig!");
+    }
   }
 
   checkNick() {
@@ -46,7 +66,10 @@ export class ChatBarComponent implements OnInit {
     this.nickName = this.pService.myNickname;
 
     // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
-    this.chatMessage = this.nickName+": "+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
-    this.chatText = ''; // Hat keine Wirkung mehr
+    if (this.checkMsg(this.chatText.trim())) // Falls überhaupt was drin steht, natürlich
+    {
+      this.chatMessage = this.nickName+": "+this.chatText.trim()+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
+    }
+    this.chatText = '';
   }
 }

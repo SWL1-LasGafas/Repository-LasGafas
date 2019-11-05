@@ -42,7 +42,7 @@ export class NickNameComponent implements OnInit {
     }
     else {
       console.log("Nickname " + this.nickName + " ungültig!");
-      alert("Nickname ungültig. Bitte nur Buchstaben verwenden!");
+      alert("Nickname ungültig. Bitte nur Buchstaben verwenden! Mindestens 4 Zeichen!");
     }
   }
 
