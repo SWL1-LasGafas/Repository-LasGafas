@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
   initialText:string="...";
   messageText:string="";
   historyText:string="";
+  nickName:string="";
   nickSet:boolean=false;
 
   scrollTop() {
