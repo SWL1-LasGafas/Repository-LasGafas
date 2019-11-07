@@ -1,23 +1,31 @@
-.mainarea {
-    position:absolute;
-    top:120px;
-    left:20px;
-    right:20px;
-    bottom: 10%;
+.container-fluid {
+    margin-top: 100px;
+}
+#mainchatbereich {
 
+    /*
     min-width: 50%;
     max-width: 60%;
     min-height: 60%;
+    */
 
-    margin: auto;
-    padding: 5px;
-       
+      
     color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border: 5px solid rgb(0, 102, 185);
 }
 
+#mainlinks {
 
+    border: 2px solid black;
+
+}
+
+#mainrechts {
+    
+    border: 2px solid black;
+
+}
 
 #chatausgabe {
     color: grey;

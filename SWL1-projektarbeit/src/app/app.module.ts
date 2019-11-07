@@ -8,6 +8,7 @@ import { MainComponent } from './main/main.component';
 import { FooterComponent } from './footer/footer.component';
 import { ChatBarComponent } from './chat-bar/chat-bar.component';
 import { ChatHistoryComponent } from './chat-history/chat-history.component';
+import { NickNameComponent } from './nick-name/nick-name.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ChatHistoryComponent } from './chat-history/chat-history.component';
     MainComponent,
     FooterComponent,
     ChatBarComponent,
-    ChatHistoryComponent
+    ChatHistoryComponent,
+    NickNameComponent
   ],
   imports: [
     BrowserModule,
