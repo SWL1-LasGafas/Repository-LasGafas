@@ -1,56 +1,57 @@
 .container-fluid {
-    margin-top: 2%;
 
-    border: 2px solid yellowgreen;
-}
-#mainchatbereich {
+    position: relative;
+    top: 10%;
 
-    /*
-    min-width: 50%;
-    max-width: 60%;
-    min-height: 60%;
-    */
-
-      
-    color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border: 5px solid rgb(0, 102, 185);
+
+    }
+
+#mainchatbereich {
+     
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 2px solid rgb(00, 00, 00);
+    background-color: rgba(200, 65, 40, 1);
 }
 
 #mainlinks {
 
-    border: 2px solid black;
+    color: white;
+    background-color: rgba(222, 89, 33, 1);
+
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;    
 
 }
 
 #mainrechts {
-    
-    border: 2px solid black;
+
+    color: white;
+    background-color: rgba(222, 89, 33, 1);
+
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
 
 }
 
 #chatausgabe {
-    color: grey;
+    color: white;
     font-size: 25px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #eingabebereich {
-    color: black;
+    color: white;
     font-size: 15px;
     
     border-bottom: 2px solid grey;
-}
-
-
-.area1 {
-    background-color:#00BFFF;
-}
-
-.area2 {
-    background-color:#00639e;
-}
-
-.area3 {
-    background-color:#FFFFFF;
 }

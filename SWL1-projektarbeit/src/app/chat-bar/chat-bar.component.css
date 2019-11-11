@@ -1,14 +1,15 @@
 #eingabebereich {
-    color: black;
+    color: white;
     font-size: 15px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 textarea {
-    background-color: none;
+    color: white;
+    background-color: black;
     width: 100%;
     height: 65%;
-    border: 1px solid rgb(0, 102, 185);
+    border: 1px solid black;
 }
 
 #textfeld, #sendebutton {

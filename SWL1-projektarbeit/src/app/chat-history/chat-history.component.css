@@ -1,8 +1,10 @@
 textarea {
     top: 150px;
 
-    color: black;
-    background-color: #F2EFEF;
+    border: 1px solid black;
+
+    color: white;
+    background-color: rgb(00, 00, 00);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
     width: 100%;
