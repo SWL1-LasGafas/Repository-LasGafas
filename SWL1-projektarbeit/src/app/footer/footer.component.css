@@ -1,9 +1,11 @@
-.footerarea {
-    position: fixed;
-    top:95%;
-    left:40px;
-    right:40px;
-    min-height:35px;
-    max-width: 100%;
-    background-color:#A0A0A0;
+.container-fluid {
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#footertext {
+
+    position: relative;    
+    top: 95%;
+    color: white;
+    background-color: rgb(200, 65, 40);
 }
