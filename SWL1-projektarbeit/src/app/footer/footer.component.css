@@ -1,4 +1,4 @@
-
+/*
 .container-fluid {
    font-family: Verdana, Geneva, Tahoma, sans-serif;
 
@@ -21,4 +21,40 @@
     
     color: white;
     background-color: rgb(200, 65, 40);
+}
+*/
+.container-fluid {
+    position: fixed;
+    top: 710px;
+
+    background-color: rgb(200, 65, 40);
+    height: 80px;
+
+    border-top: 2px solid black;
+}
+
+#footertext {
+    color: white;
+}
+
+
+@media (max-width: 992px) {
+    .container-fluid {
+        position: fixed;
+        top: 710px;
+    }
+}
+
+@media (max-width: 770px) {
+    .container-fluid {
+        position: fixed;
+        top: 700px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container-fluid {
+        position: fixed;
+        top: 690px;
+    }
 }

@@ -1,8 +1,8 @@
+
 .container-fluid {
 
-    position: absolute;
-
-    top: 15%;
+    position: fixed;
+    top: 130px;
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
@@ -17,6 +17,7 @@
     border-right: 2px solid rgb(00, 00, 00);
     border-bottom: 2px solid black;
     background-color: rgba(200, 65, 40, 1);
+
 }
 
 #mainlinks {
@@ -57,3 +58,32 @@
     
     border-bottom: 2px solid grey;
 }
+
+@media (max-width: 992px) {
+
+    .container-fluid {
+        position: fixed;
+        top: 130px;
+    }
+
+}
+
+@media (max-width: 770px) {
+
+    .container-fluid {
+        position: fixed;
+        top: 110px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .container-fluid {
+        position: fixed;
+        top: 90px;
+    }
+
+}
+
+
