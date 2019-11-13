@@ -1,11 +1,24 @@
+
 .container-fluid {
    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+   background-color: rgb(200, 65, 40);
+
+}
+
+.row {
+    background-color: rgb(200, 65, 40);
 }
 
 #footertext {
 
-    position: relative;    
-    top: 95%;
+    position: fixed;
+    bottom: 0%;
+
+    border-top: 4px solid black;
+    border-bottom: 2px solid black;
+
+    
     color: white;
     background-color: rgb(200, 65, 40);
 }

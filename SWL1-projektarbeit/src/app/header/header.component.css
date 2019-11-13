@@ -1,6 +1,6 @@
 
 .container-fluid {
-    border: 2px solid black;
+    border-bottom: 2px solid black;
     background: rgba(200, 65, 40, 1);
 
     height: 5%;
