@@ -3,6 +3,10 @@
     position: relative;
     top: 10%;
 
+    border: 3px solid green;
+
+    height: 90%;
+
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
     }
