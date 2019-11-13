@@ -2,6 +2,7 @@ textarea {
     top: 150px;
 
     border: 1px solid black;
+    border-radius: 10px;
 
     color: white;
     background-color: rgb(00, 00, 00);
