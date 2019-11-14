@@ -1,28 +1,4 @@
-/*
-.container-fluid {
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-   background-color: rgb(200, 65, 40);
-
-}
-
-.row {
-    background-color: rgb(200, 65, 40);
-}
-
-#footertext {
-
-    position: fixed;
-    bottom: 0%;
-
-    border-top: 2px solid black;
-    
-
-    
-    color: white;
-    background-color: rgb(200, 65, 40);
-}
-*/
 .container-fluid {
     position: fixed;
     top: 710px;
@@ -35,26 +11,27 @@
 
 #footertext {
     color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 
 @media (max-width: 992px) {
     .container-fluid {
         position: fixed;
-        top: 710px;
+        top: 700px;
     }
 }
 
 @media (max-width: 770px) {
     .container-fluid {
         position: fixed;
-        top: 700px;
+        top: 690px;
     }
 }
 
 @media (max-width: 600px) {
     .container-fluid {
         position: fixed;
-        top: 690px;
+        top: 680px;
     }
 }
