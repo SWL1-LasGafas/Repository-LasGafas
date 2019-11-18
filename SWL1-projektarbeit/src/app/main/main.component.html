@@ -9,7 +9,7 @@
            
                      <div id="mainchatbereich" class="col-6" style="white-space: pre-line">
 
-                             <span [hidden]="nickSet">
+                             <span>
                                <app-nick-name (nickNameChange)="nickChange($event)"></app-nick-name>
                              </span>
                              <span [hidden]="!nickSet">
