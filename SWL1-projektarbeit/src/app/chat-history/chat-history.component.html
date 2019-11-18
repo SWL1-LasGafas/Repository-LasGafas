@@ -3,14 +3,9 @@
         <div class="row">
             <ul class="list-group" id="myForm">
                 <li class="list-group-item" *ngFor="let message of content">
-                    {{message}}
+                    <div [innerHTML]="message" class="chatmessage"></div>
                 </li>
             </ul>
         </div>
-
-        <!-- textarea entfällt
-        <textarea readonly cols=60 rows=1 id="historyContainer" (click)="scrollTop()">{{content}}</textarea>
-        -->
-
     </div>
 </div>

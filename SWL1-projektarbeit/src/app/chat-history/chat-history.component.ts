@@ -11,7 +11,7 @@ export class ChatHistoryComponent implements DoCheck {
 
   public content:string[]=[];
 
-  scrollTop() { // Funktioniert, aber die Auslösung ist ein Problem, weil es hier nicht so ist, wie in der Lösung
+  scrollTop() { 
     console.log("Scrolling down");
     document.getElementById("myForm").scrollTop=document.getElementById("myForm").scrollHeight;
   }
@@ -21,7 +21,7 @@ export class ChatHistoryComponent implements DoCheck {
   set chatHistory(value:string) {
     console.log('set history');
     this.content.push(value);
-    this.scrollTop(); // funktioniert immer noch nicht bzw. scrollt nur bis zur Position, die es war, als der neue Text noch nicht drin war. Und weiter scrollen als der aktuelle Inhalt lang ist, macht das textarea nicht mit.
+    this.scrollTop(); 
   }
 
   ngDoCheck()
