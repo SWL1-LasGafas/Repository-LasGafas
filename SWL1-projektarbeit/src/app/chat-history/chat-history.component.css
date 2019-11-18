@@ -12,9 +12,21 @@ textarea {
     height: 25%;
 }
 
+
 #myForm {
+
+    color: white;
+    background-color: rgb(00, 00, 00);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     height: 280px;
     width: 100%;
     overflow-y: auto;
     color: black;
 }
+
+#myForm li {
+    color: white;
+    background-color: rgb(00, 00, 00);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
