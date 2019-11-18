@@ -1,10 +1,20 @@
 <div class="container">
     <div class=col-12>
-        
-          <textarea readonly cols=60 rows=9 id="historyContainer" (click)="scrollTop()">{{content}}</textarea>
-          <br />
-          <br />
-          <br />
-          
+        <div class="row">
+            <ul class="list-group" id="myForm">
+                <li class="list-group-item" *ngFor="let message of content">
+                    {{message}}
+                </li>
+            </ul>
+        </div>
+
+        <!-- textarea entfällt -->
+        <br/>
+        <textarea readonly cols=60 rows=9 id="historyContainer" (click)="scrollTop()">{{content}}</textarea>
+        <br />
+        <br />
+        <br />
+    
+
     </div>
 </div>

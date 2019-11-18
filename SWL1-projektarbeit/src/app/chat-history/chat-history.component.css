@@ -11,3 +11,10 @@ textarea {
     width: 100%;
     height: 25%;
 }
+
+#myForm {
+    height: 250px;
+    width: 100%;
+    overflow-y: auto;
+    color: black;
+}
