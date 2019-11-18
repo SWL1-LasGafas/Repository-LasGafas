@@ -1,10 +1,10 @@
 
 .container-fluid {
     position: fixed;
-    top: 640px;
+    bottom: 0px;
 
     background-color: rgb(200, 65, 40);
-    height: 100px;
+    height: 30px;
 
     border-top: 2px solid black;
 }
@@ -18,26 +18,26 @@
 @media screen and (max-width: 992px), screen and (max-height: 650px) {
     .container-fluid {
         position: fixed;
-        top: 540px;
+        bottom: 0px;
 
-        height: 130px;
+        height: 30px;
     }
 }
 
 @media screen and (max-width: 770px), screen and (max-height: 550px) {
     .container-fluid {
         position: fixed;
-        top: 450px;
+        bottom: 0px;
 
-        height: 100px;
+        height: 25px;
     }
 }
 
 @media screen and (max-width: 600px), screen and (max-height: 460px) {
     .container-fluid {
         position: fixed;
-        top: 350px;
+        bottom: 0px;
 
-        height: 100px;
+        height: 25px;
     }
 }
