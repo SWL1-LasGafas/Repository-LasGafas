@@ -9,7 +9,11 @@
     }
 
 #mainchatbereich {
-     
+
+    position: relative;
+    top: 0px;
+    width: 100%;
+    height: 465px;     
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border-top: 2px solid rgb(00, 00, 00);
@@ -59,29 +63,51 @@
     border-bottom: 2px solid grey;
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px), screen and (max-height: 650px) {
 
     .container-fluid {
         position: fixed;
         top: 130px;
     }
 
-}
+    #mainchatbereich {
 
-@media (max-width: 770px) {
-
-    .container-fluid {
-        position: fixed;
-        top: 110px;
+        position: relative;
+        top: 0px;
+        width: 100%;
+        height: 370px;    
     }
 
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 770px), screen and (max-height: 550px) {
+
+    .container-fluid {
+        position: fixed;
+        top: 130px;
+    }
+
+    #mainchatbereich {
+
+        position: relative;
+        top: 0px;
+        height: 270px;   
+    }
+
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 460px) {
 
     .container-fluid {
         position: fixed;
         top: 90px;
+    }
+
+    #mainchatbereich {
+
+        position: relative;
+        top: 0px;
+        height: 220px; 
     }
 
 }
