@@ -8,6 +8,7 @@ export class PersonService {
   constructor() { }
 
   myNickname:string = '';
+  myOldNickname:string = '';
 
   public getNickname(): string {
     return this.myNickname;
@@ -16,6 +17,15 @@ export class PersonService {
   // setter
   public setNickname(value:string) {
     this.myNickname = value;
+  }
+
+  public getOldNickname(): string {
+    return this.myOldNickname;
+  }
+
+  // setter
+  public setOldNickname(value:string) {
+    this.myOldNickname = value;
   }
 
 }

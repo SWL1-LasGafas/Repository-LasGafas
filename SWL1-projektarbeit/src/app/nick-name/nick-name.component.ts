@@ -36,8 +36,9 @@ export class NickNameComponent implements OnInit {
 
   setNickname() {
     if (this.checkNickname(this.nickName)) {
+      this.pService.myOldNickname = this.pService.myNickname;
       this.pService.myNickname = this.nickName;
-      console.log("Nickname=" + this.nickName);
+      console.log("Nickname von " +this.pService.myOldNickname + ' nach ' + this.nickName);
       this.nickNameChange.emit(this.nickName);
     }
     else {
