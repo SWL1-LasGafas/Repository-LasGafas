@@ -67,14 +67,14 @@ export class ChatBarComponent implements OnInit {
     var dt = new Date();
     var daynames:string[]=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
 
-    // Test für die Funktion pad()
+    // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
     //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
 
     this.nickName = this.pService.myNickname;
     this.tstamp = daynames[dt.getDay()]+', '+this.pad(dt.getDate(),2)+'-'+this.pad((dt.getMonth()+1),2)+'-'+dt.getFullYear()+', '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2); // Hier wird das Datum formatiert
 
     // Hier finden Reinigung und Montage des Textes statt.
-    if (this.checkMsg(this.chatText.trim())) // Falls überhaupt was drin steht, natürlich
+    if (this.checkMsg(this.chatText.trim())) // Falls überhaupt etwas drin steht, natürlich
     {
       this.chatMessage = '<span class="myNick">'+this.nickName+": </span>"+'&nbsp;&nbsp;<span class="tstamp">'+this.tstamp+'</span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     }

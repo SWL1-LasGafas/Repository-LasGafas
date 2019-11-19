@@ -32,7 +32,7 @@ export class MainComponent implements OnInit {
   }
 
   chatMsg(event: any): void {
-    // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole grausam zuballert
+    // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole überfüllt
     this.historyText=<string>event;
     this.messageText="";
   }
