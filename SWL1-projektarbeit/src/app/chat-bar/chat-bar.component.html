@@ -1,30 +1,25 @@
 <div id="chatarea">
+    <div class="container">
 
-    <div class="row">
-        <div class="col-12" (click)="checkNick()">
-            <p id="eingabebereich">Eingabebereich</p>
-
+        <div class="row">
+            <div class="col-12" (click)="checkNick()">
+                <p id="eingabebereich">Eingabebereich</p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div id="textfeld">
-                <textarea maxlength="1000" cols=100 [(ngModel)]="chatText" placeholder="Schreiben Sie hier Ihren Text."
+
+        <div class="row">
+            <div id="textfeld" class="col-12">
+                <textarea id="chatfeld" maxlength="1000" [(ngModel)]="chatText" placeholder="Schreiben Sie hier Ihren Text."
                     (keyup.enter)="sendChat()"></textarea>
             </div>
         </div>
-    </div>
 
-    <br />
-
-    <div class="row">
-        <div class="col-12">
-            <div id="sendebutton">
-                <button type="button" class="btn btn-outline-light btn-large" type="submit" name="submit" value="Absenden"
-                    (click)="sendChat()" [disabled]="!chatText">Absenden</button><br />
+        <div class="row">
+            <div id="sendebutton" class="col-12">
+                <button type="button" class="btn btn-outline-light btn-large" type="submit" name="submit"
+                    value="Absenden" (click)="sendChat()" [disabled]="!chatText">Absenden</button><br />
             </div>
-            <br />
-            <br />
+
         </div>
     </div>
 </div>
