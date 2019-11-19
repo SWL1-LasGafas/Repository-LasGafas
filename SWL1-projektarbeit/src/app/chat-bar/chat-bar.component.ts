@@ -15,7 +15,6 @@ export class ChatBarComponent implements OnInit {
   public nickName:string = "";
   isOK:boolean=false;
   tstamp:string='';
-  now:number=Date.now();
 
   ngOnInit() {
   }
@@ -56,12 +55,25 @@ export class ChatBarComponent implements OnInit {
     this.nickName = this.pService.myNickname;
   }
 
+  // Diese Funktion hängt führende Nullen an. Mit Berücksichtigung Vorzeichen
+  // adaptiert von https://gist.github.com/endel/321925f6cafa25bbfbde
+  pad = function(val:any,size:number):string {
+    var sign = Math.sign(val) === -1 ? '-' : '';
+    return sign + new Array(size).concat([Math.abs(val)]).join('0').slice(-size);
+  }
+
   sendChat() {
 
-    this.nickName = this.pService.myNickname;
-    this.tstamp = this.now.toString(); // Hier muss das Datum jetzt irgendwie formatiert werden.
+    var dt = new Date();
+    var daynames:string[]=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
 
-    // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
+    // Test für die Funktion pad()
+    //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
+
+    this.nickName = this.pService.myNickname;
+    this.tstamp = daynames[dt.getDay()]+', '+this.pad(dt.getDate(),2)+'-'+this.pad((dt.getMonth()+1),2)+'-'+dt.getFullYear()+', '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2); // Hier wird das Datum formatiert
+
+    // Hier finden Reinigung und Montage des Textes statt.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt was drin steht, natürlich
     {
       this.chatMessage = '<span class="myNick">'+this.nickName+": </span>"+'&nbsp;&nbsp;<span class="tstamp">'+this.tstamp+'</span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
