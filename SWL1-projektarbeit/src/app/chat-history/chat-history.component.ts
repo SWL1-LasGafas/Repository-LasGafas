@@ -17,7 +17,6 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   @Input()
-  //chatHistory: string; // Hier kommt die History rein
   set chatHistory(value:string) {
     console.log('set history');
     this.content.push(value);
