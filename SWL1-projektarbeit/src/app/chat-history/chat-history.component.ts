@@ -17,15 +17,14 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   @Input()
-  set chatHistory(value:string) {
+  set chatHistory(value:string) {  // Jetzt ist es nicht mehr möglich, zweimal exakt den gleichen Text zu senden. Das empfinde ich aber als gute Flood Protection und belasse es deshalb
     console.log('set history');
     this.content.push(value);
-    this.scrollTop(); 
   }
 
   ngDoCheck()
   {
-    this.scrollTop(); 
+    this.scrollTop();  // Verhalten etwas suboptimal, weil es jetzt bei jedem einzelnen Tastendruck im Eingabefeld scrollt. Aber es scrollt, immerhin.
   }
 
 }
