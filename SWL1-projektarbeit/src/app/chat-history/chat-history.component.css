@@ -1,32 +1,45 @@
-textarea {
-    top: 150px;
-
-    border: 1px solid black;
-    border-radius: 10px;
-
-    color: white;
-    background-color: rgb(00, 00, 00);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-    width: 100%;
-    height: 25%;
+#chatarea {
+    position: relative;
+    top: -10px;
 }
 
-
 #myForm {
+    position: relative;
 
-    color: white;
-    background-color: rgb(00, 00, 00);
+    color: black;
+    background-color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 280px;
+    height: 270px;
     width: 100%;
     overflow-y: auto;
     color: black;
+    border-radius: 10px;
 }
 
 #myForm li {
-    color: white;
-    background-color: rgb(00, 00, 00);
+    color: black;
+    background-color: tomato;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media (max-height: 700px) {
+    #myForm {
+        height: 210px;
+        width: 100%;
+    }
+}
+
+@media (max-height: 615px) {
+    #myForm {
+        height: 120px;
+        width: 100%;
+    }
+}
+
+@media (max-height: 500px) {
+    #myForm {
+        height: 60px;
+        width: 100%;
+    }
 }
 

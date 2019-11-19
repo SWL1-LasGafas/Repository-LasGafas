@@ -1,6 +1,6 @@
 <div class="container">
-    <div class=col-12>
-        <div class="row">
+    <div class="row">
+        <div id="chatarea" class="col-12">
             <ul class="list-group" id="myForm">
                 <li class="list-group-item" *ngFor="let message of content">
                     <div [innerHTML]="message" class="chatmessage"></div>
