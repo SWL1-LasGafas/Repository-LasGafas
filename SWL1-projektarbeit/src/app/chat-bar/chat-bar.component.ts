@@ -15,6 +15,7 @@ export class ChatBarComponent implements OnInit {
   public nickName:string = "";
   isOK:boolean=false;
   tstamp:string='';
+  now:number=Date.now();
 
   ngOnInit() {
   }
@@ -58,7 +59,7 @@ export class ChatBarComponent implements OnInit {
   sendChat() {
 
     this.nickName = this.pService.myNickname;
-    this.tstamp = "dummydate";
+    this.tstamp = this.now.toString(); // Hier muss das Datum jetzt irgendwie formatiert werden.
 
     // Hier findet noch die Reinigung des Textes statt. Aus Speicherspargründen hier, damit der kürzestmögliche Text verschickt wird.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt was drin steht, natürlich
