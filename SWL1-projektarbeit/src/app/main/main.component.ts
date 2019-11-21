@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   }
 
   systemMsg(msg:string) {
-    this.historyText='<span class="systemMsg">Systemmeldung: '+msg+'</span>';
+    this.historyText='<span class="systemMsg">'+msg+'</span>';
   }
 
   nickChange(event: any): void {
