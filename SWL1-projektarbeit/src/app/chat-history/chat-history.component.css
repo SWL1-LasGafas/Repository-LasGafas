@@ -17,14 +17,6 @@
     border-radius: 10px;
 }
 
-.tstamp {
-    color: green;
-}
-
-.chatmessage {
-    color: tomato;
-}
-
 @media (max-height: 700px) {
     #myForm {
         height: 210px;
