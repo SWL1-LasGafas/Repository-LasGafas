@@ -76,7 +76,7 @@ export class ChatBarComponent implements OnInit {
     // Hier finden Reinigung und Montage des Textes statt.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt etwas drin steht, natürlich
     {
-      this.chatMessage = '<span class="myNick">'+this.nickName+": </span>"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp">'+this.tstamp+'</span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
+      this.chatMessage = '<span class="myNick"><strong>'+this.nickName+": </strong></span>"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>'+this.tstamp+'</small></span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     }
     this.chatText = '';
   }
