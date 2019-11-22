@@ -38,6 +38,15 @@
     }
 }
 
+/* Chat-Message */
+strong {
+    text-decoration:bold;
+    color:#dddddd;
+}
+small {
+    font-size: 10pt;
+}
+
 /* Rote scrollbar */
 /* width */
 ::-webkit-scrollbar {
