@@ -26,7 +26,7 @@ export class ChatHistoryComponent implements DoCheck {
     this.content.push(value);
     // Array auf definierten Wert kürzen
     if (this.content.length > this.historyLength) {
-      console.log('History gekürzt auf '+this.historyLength)
+      console.log('History gekürzt von '+this.content.length+' auf '+this.historyLength+' Elemente')
       this.content.shift();
     }
   }
