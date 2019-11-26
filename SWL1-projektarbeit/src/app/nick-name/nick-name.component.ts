@@ -18,9 +18,23 @@ export class NickNameComponent implements OnInit {
 
   checkNickname(value: string): boolean {
 
+    this.isOK = false;
+    var regex = '^[a-zA-Z]+.*$';
+    var notallowed = '[ ]';
+
     if (value.length >= 4) {
-      if (value.match("^([a-z]|[A-Z]|[ä,ö,ü,Ä,Ö,Ü,ç,è,é,à])*$")) {
-        this.isOK = true;
+      console.log('Nick lang genug!');
+//      if (value.match("^([a-z]|[A-Z]|[ä,ö,ü,Ä,Ö,Ü,ç,è,é,à])*$")) {
+      if (value.match(regex)) {
+        console.log('Nick Regex OK!');
+        if (value.search(notallowed)>0) // Zweite Suche nach dem nicht erlaubten Zeichen, weil ein einzelnes Regex nicht so wirklich geklappt hat
+        {
+          console.log('Nick enthält '+notallowed)
+          this.isOK = false;
+        }
+        else {
+          this.isOK = true;
+        }
       }
     }
     else {
@@ -35,6 +49,7 @@ export class NickNameComponent implements OnInit {
   nickNameChange = new EventEmitter<string>();
 
   setNickname() {
+    this.nickName=this.nickName.trim();
     if (this.checkNickname(this.nickName)) {
       this.pService.myOldNickname = this.pService.myNickname;
       this.pService.myNickname = this.nickName;
@@ -43,7 +58,7 @@ export class NickNameComponent implements OnInit {
     }
     else {
       console.log("Nickname " + this.nickName + " ungültig!");
-      alert("Nickname ungültig. Bitte nur Buchstaben verwenden! Mindestens 4 Zeichen!");
+      alert("Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen!");
     }
   }
 
