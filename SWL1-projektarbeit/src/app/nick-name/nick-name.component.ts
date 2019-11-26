@@ -19,7 +19,7 @@ export class NickNameComponent implements OnInit {
   checkNickname(value: string): boolean {
 
     this.isOK = false;
-    var regex = '^[a-zA-Z]+.*$';
+    var regex = '^.*[a-zA-Z]+.*$';
     var notallowed = '[ ]';
 
     if (value.length >= 4) {
