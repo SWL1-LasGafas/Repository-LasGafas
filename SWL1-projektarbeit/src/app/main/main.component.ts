@@ -10,31 +10,40 @@ export class MainComponent implements OnInit {
 
   constructor(public pService: PersonService) { }
 
-  initialText:string="...";
-  messageText:string="";
-  historyText:string="";
-  nickName:string="";
-  nickSet:boolean=false;
+  initialText: string = "...";
+  messageText: string = "";
+  historyText: string = "";
+  nickName: string = "";
+  nickSet: boolean = false;
+  errorMsg: string = '';
 
   ngOnInit() {
   }
 
-  systemMsg(msg:string) {
-    this.historyText='<span class="systemMsg">'+msg+'</span>';
+  systemMsg(msg: string) {
+    this.historyText = '<span class="systemMsg">' + msg + '</span>';
   }
 
   nickChange(event: any): void {
     console.log("Nickname Change");
-    this.nickSet=true;
-    if (this.pService.myOldNickname) { // Nur melden, wenn vorher ein Nickname gesetzt war
-      this.systemMsg("Nickname von "+this.pService.myOldNickname+" hat geändert auf "+this.pService.myNickname+"!");
+    if (this.pService.nickInvalid < 1) { 
+      if (this.pService.myOldNickname) { // Nur melden, wenn vorher ein Nickname gesetzt war
+        console.log("Nick gesetzt und OK!");
+        this.systemMsg("Nickname von " + this.pService.myOldNickname + " hat geändert auf " + this.pService.myNickname + "!");
+      }
+      this.errorMsg = '';
+      this.nickSet = true;
+    }
+    else {
+      console.log('Invalid Nick detected! '+this.pService.nickInvalid);
+      this.errorMsg = 'Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen!';  // systemMsg geht nicht, weil nicht davon ausgegangen werden kann, dass die chathistory überhaupt schon sichtbar ist.
     }
   }
 
   chatMsg(event: any): void {
     // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole überfüllt
-    this.historyText=<string>event;
-    this.messageText="";
+    this.historyText = <string>event;
+    this.messageText = "";
   }
 
 }

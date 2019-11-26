@@ -54,12 +54,15 @@ export class NickNameComponent implements OnInit {
       this.pService.myOldNickname = this.pService.myNickname;
       this.pService.myNickname = this.nickName;
       console.log("Nickname von " +this.pService.myOldNickname + ' nach ' + this.nickName);
-      this.nickNameChange.emit(this.nickName);
+      this.pService.nickInvalid=0;
     }
     else {
       console.log("Nickname " + this.nickName + " ungültig!");
-      alert("Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen!");
+//      alert("Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen!"); // alert muss gemäs Story verschwinden.
+      this.pService.nickInvalid=1;
     }
+    console.log('emitting NickNameChange Event');
+    this.nickNameChange.emit(this.nickName);
   }
 
 }

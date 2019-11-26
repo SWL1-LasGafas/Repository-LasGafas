@@ -9,6 +9,7 @@ export class PersonService {
 
   myNickname:string = '';
   myOldNickname:string = '';
+  nickInvalid:number = 0;
 
   public getNickname(): string {
     return this.myNickname;
@@ -17,6 +18,14 @@ export class PersonService {
   // setter
   public setNickname(value:string) {
     this.myNickname = value;
+  }
+
+  public getNickInvalid():number {
+    return this.nickInvalid;
+  }
+
+  public setNickInvalid(value:number) {
+    this.nickInvalid=value;
   }
 
   public getOldNickname(): string {
