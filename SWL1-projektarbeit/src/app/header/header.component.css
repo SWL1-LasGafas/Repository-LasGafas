@@ -13,9 +13,9 @@
 
 #logo {
 
-    position: fixed;
+    position: relative;
     top: 5px;
-    left: 25px;
+    float: left;
 
     width: 120px;
     height: 110px;
@@ -23,9 +23,9 @@
 
 #headertitle h1 {
 
-    position: fixed;
+    position: relative;
     top: -12px;
-    right: 30%;
+    float: left;
 
     color: white;
     font-size: 95px;
@@ -42,10 +42,9 @@
 
         #logo {
 
-            position: fixed;
+            position: relative;
             top: 5px;
-            left: 25px;
-
+            
             width: 120px;
             height: 110px;
         }
@@ -72,9 +71,8 @@
 
         #logo {
 
-            position: fixed;
+            position: relative;
             top: 5px;
-            left: 25px;
 
             width: 100px;
             height: 92px;
