@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { PersonService } from '../person.service';
 
+
 @Component({
   selector: 'app-nick-name',
   templateUrl: './nick-name.component.html',

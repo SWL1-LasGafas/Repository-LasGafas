@@ -1,5 +1,7 @@
 import { Component, DoCheck, Input } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { ConfigurationService } from '../configuration.service';
+
 
 @Component({
   selector: 'app-chat-history',
@@ -10,10 +12,10 @@ import { AppComponent } from '../app.component';
 
 export class ChatHistoryComponent implements DoCheck {
 
-  constructor() { }
+  constructor(public cService: ConfigurationService) { }
 
   public content:string[]=[];
-  public historyLength:number = 50; // TODO: Definition globaler Konstanten in angular.js muss noch nachgeschlagen werden. Gibt mehrere sehr komplizierte Ansätze, die nicht wirklich sinnvoll scheinen
+  public historyLength:number = this.cService.historyMaxLength; // Bezieht Infos aus dem Configuration Service
 
   scrollTop() { 
     console.log("Scrolling down");
