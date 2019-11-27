@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
     if (this.pService.nickInvalid < 1) { 
       if (this.pService.myOldNickname) { // Nur melden, wenn vorher ein Nickname gesetzt war
         console.log("Nick gesetzt und OK!");
-        this.systemMsg("Nickname von " + this.pService.myOldNickname + " hat geändert auf " + this.pService.myNickname + "!");
+        this.systemMsg("** " + this.pService.myOldNickname + " ändert Nickname auf " + this.pService.myNickname + " **");
       }
       this.errorMsg = '';
       this.nickSet = true;

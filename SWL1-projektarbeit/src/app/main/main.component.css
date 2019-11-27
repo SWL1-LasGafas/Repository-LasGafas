@@ -57,6 +57,11 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#errorMessage {
+    position: relative;
+    top: 55px;
+}
+
 @media (max-height: 700px) {
 
     .container-fluid {
@@ -118,6 +123,12 @@
         position: relative;
         top: 0px;
         height: 265px; 
+    }
+
+    #errorMessage {
+        position: relative;
+        top: 55px;
+        font-size: 11px;
     }
 
 }
