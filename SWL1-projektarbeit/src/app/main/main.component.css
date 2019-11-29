@@ -59,7 +59,9 @@
 
 #errorMessage {
     position: relative;
-    top: 55px;
+    top: 60px;
+    color: rgba(200, 65, 40, 1);
+    font-size: 15px;
 }
 
 @media (max-height: 700px) {
