@@ -71,7 +71,7 @@ export class ChatBarComponent implements OnInit {
     //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
 
     this.nickName = this.pService.myNickname;
-    this.tstamp = +this.pad(dt.getDate(),2)+'/'+this.pad((dt.getMonth()+1),2)+'/'+dt.getFullYear()+' - '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2); // Hier wird das Datum formatiert
+    this.tstamp = daynames[dt.getDay()]+', '+this.pad(dt.getDate(),2)+'/'+this.pad((dt.getMonth()+1),2)+'/'+dt.getFullYear()+' - '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2); // Hier wird das Datum formatiert
 
     // Hier finden Reinigung und Montage des Textes statt.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt etwas drin steht, natürlich
