@@ -65,14 +65,13 @@ export class ChatBarComponent implements OnInit {
   sendChat() {
 
     var dt = new Date();
-    var daynames:string[]=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+    var monthnames:string[]=["Januar","Februar","März","April","Mai","Juni","Juli", "August", "September", "Oktober", "November", "Dezember"];
 
     // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
     //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
 
     this.nickName = this.pService.myNickname;
-    this.tstamp = daynames[dt.getDay()]+', '+this.pad(dt.getDate(),2)+'/'+this.pad((dt.getMonth()+1),2)+'/'+dt.getFullYear()+' - '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2); // Hier wird das Datum formatiert
-
+    this.tstamp = this.pad(dt.getDate(),1)+'. '+ monthnames[dt.getMonth()]+ ' '+ dt.getFullYear()+', '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2)+' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
     // Hier finden Reinigung und Montage des Textes statt.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt etwas drin steht, natürlich
     {
