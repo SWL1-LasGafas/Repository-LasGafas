@@ -25,18 +25,27 @@ export class NickNameComponent implements OnInit {
 
     if (value.length >= 4) {
       console.log('Nick lang genug!');
-//      if (value.match("^([a-z]|[A-Z]|[ä,ö,ü,Ä,Ö,Ü,ç,è,é,à])*$")) {
-      if (value.match(regex)) {
-        console.log('Nick Regex OK!');
-        if (value.search(notallowed)>0) // Zweite Suche nach dem nicht erlaubten Zeichen, weil ein einzelnes Regex nicht so wirklich geklappt hat
-        {
-          console.log('Nick enthält '+notallowed)
-          this.isOK = false;
+      //if (value.match("^([a-z]|[A-Z]|[ä,ö,ü,Ä,Ö,Ü,ç,è,é,à])*$")) {
+      if (value.length <= 10) {
+        console.log('Nick nicht zu lang!');
+        if (value.match(regex)) {
+          console.log('Nick Regex OK!');
+          if (value.search(notallowed) > 0) // Zweite Suche nach dem nicht erlaubten Zeichen, weil ein einzelnes Regex nicht so wirklich geklappt hat
+          {
+            console.log('Nick enthält ' + notallowed)
+            this.isOK = false;
+          }
+          else {
+            this.isOK = true;
+          }
         }
         else {
-          this.isOK = true;
+          this.isOK = false;
         }
       }
+        else {
+          this.isOK = false;
+        }
     }
     else {
       this.isOK = false;
@@ -50,20 +59,28 @@ export class NickNameComponent implements OnInit {
   nickNameChange = new EventEmitter<string>();
 
   setNickname() {
-    this.nickName=this.nickName.trim();
+    this.nickName = this.nickName.trim();
     if (this.checkNickname(this.nickName)) {
-      this.pService.myOldNickname = this.pService.myNickname;
-      this.pService.myNickname = this.nickName;
-      console.log("Nickname von " +this.pService.myOldNickname + ' nach ' + this.nickName);
-      this.pService.nickInvalid=0;
+      if (this.pService.myNickname != this.nickName) {
+        this.pService.myOldNickname = this.pService.myNickname;
+        this.pService.myNickname = this.nickName;
+        console.log("Nickname von " + this.pService.myOldNickname + ' nach ' + this.nickName);
+        this.pService.nickInvalid = 0;
+        console.log('emitting NickNameChange Event');
+        this.nickNameChange.emit(this.nickName);
+      }
+      else {
+        console.log("Nickname identisch!");
+      }
     }
     else {
       console.log("Nickname " + this.nickName + " ungültig!");
-//      alert("Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen!"); // alert muss gemäs Story verschwinden.
-      this.pService.nickInvalid=1;
+      //alert("Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen!"); // alert muss gemäs Story verschwinden.
+      this.pService.nickInvalid = 1;
+      console.log('emitting NickNameChange Event');
+      this.nickNameChange.emit(this.nickName);
     }
-    console.log('emitting NickNameChange Event');
-    this.nickNameChange.emit(this.nickName);
+
   }
 
 }
