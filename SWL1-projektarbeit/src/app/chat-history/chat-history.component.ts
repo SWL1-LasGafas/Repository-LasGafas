@@ -1,7 +1,8 @@
 import { Component, DoCheck, Input } from '@angular/core';
-import { AppComponent } from '../app.component';
+//import { AppComponent } from '../app.component';
 import { ConfigurationService } from '../configuration.service';
-
+import { ChatserverService } from '../chatserver.service';
+import { Message } from '../message'
 
 @Component({
   selector: 'app-chat-history',
@@ -12,7 +13,7 @@ import { ConfigurationService } from '../configuration.service';
 
 export class ChatHistoryComponent implements DoCheck {
 
-  constructor(public cService: ConfigurationService) { }
+  constructor(public cService: ConfigurationService, public chatService: ChatserverService) { }
 
   public content:string[]=[];
   public historyLength:number = this.cService.historyMaxLength; // Bezieht Infos aus dem Configuration Service
@@ -31,6 +32,12 @@ export class ChatHistoryComponent implements DoCheck {
       console.log('History gekürzt von '+this.content.length+' auf '+this.historyLength+' Elemente')
       this.content.shift();
     }
+    
+    this.chatService.getHistory().subscribe(
+      (response:Message)=>{
+      console.log('REST server gave back'+response);
+      }
+    )
   }
 
   ngDoCheck()
