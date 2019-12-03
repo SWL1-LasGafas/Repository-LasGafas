@@ -73,7 +73,7 @@ export class ChatHistoryComponent implements DoCheck {
             else {
               nickIndex = 2; // Hier müsste dann irgendwas random zugewiesen sein. Das Problem mit https://angular.io/guide/security#xss besteht weiterhin!
             }
-            this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + ": </strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
+            this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
             dt = null; // Versuch, ein Speicherloch zu verhindern. gup
             i++;
 
