@@ -77,7 +77,7 @@ export class ChatHistoryComponent implements DoCheck {
             if (!this.hashlist.find(element => element==response[i].hash) ) { // prüft, ob es den md5-hash schon gibt
               console.log('hash '+response[i].hash+' neu. Post hinzugefügt.');
               this.hashlist.push(response[i].hash);
-              this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
+              this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
             }
             dt = null; // Versuch, ein Speicherloch zu verhindern. gup
             i++;
