@@ -17,9 +17,9 @@ export class ChatHistoryComponent implements DoCheck {
 
   public content: string[] = [];
   public historyLength: number = this.cService.historyMaxLength; // Bezieht Infos aus dem Configuration Service
-  newline:string = "\n";
-  tstamp:string='';
-  nickName:string = "";
+  newline: string = "\n";
+  tstamp: string = '';
+  nickName: string = "";
 
 
   scrollTop() {
@@ -35,42 +35,55 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   @Input()
-  set chatHistory(value: Message) {
+  set chatHistory(chatMsgObj: Message) {
     // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
     // Hier wird der neue Beitrag auf den REST-Server hochgeladen
-    console.log('History add: '+this.chatService.addToHistory(value));
+    if (chatMsgObj) { // Es gibt leere Einträge auf dem Chatserver. Das lässt darauf schliessen, dass POST-Requests mit leerem Zeug kommen.
+      this.chatService.addToHistory(chatMsgObj).subscribe( // Es schreibt bislang nur den ersten Eintrag, danach kommt nicht mehr viel in den REST-Server rein
+        (response: Message) => {
+          console.log('History add: ' + response.message);
+        }
+      )
+    }
 
     // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
+    this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
     this.chatService.getHistory().subscribe(
       (response: Message) => {
         console.log('REST server gave back ' + response);
         // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
-        
-        var dt = new Date(response[0].date); // wandert in chat-history
-        var monthnames:string[]=["Januar","Februar","März","April","Mai","Juni","Juli", "August", "September", "Oktober", "November", "Dezember"]; // wandert in chat-history
-    
+
+        var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wandert in chat-history
+
         // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
         //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
-    
-        this.nickName = response[0].nickname;
-        this.tstamp = this.pad(dt.getDate(),1)+'. '+ monthnames[dt.getMonth()]+ ' '+ dt.getFullYear()+', '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2)+' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
+        var i = 0;
+        try {
+          while (response[i].date) { // Das date wird vom Server gesetzt und sollte so bei jedem Beitrag vorhanden sein.
+            console.log('Add history element ' + i);
+            var dt = new Date(response[i].date); // Jedes Mal mit dem Datum des Beitrags initialisiert
+            this.nickName = response[i].nickname;
+            this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
-        // Hier findet die Montage des Textes statt.
-        this.content.push('<span class="myNick"><strong>'+this.nickName+": </strong></span>"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>'+this.tstamp+'</small></span>'+this.newline+'<span class="chatText">'+response[0].message+'</span>'+this.newline);
-        
+            // Hier findet die Montage des Textes statt.
+            this.content.push('<span class="myNick"><strong>' + this.nickName + ": </strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[0].message + '</span>' + this.newline);
+            dt = null; // Versuch, ein Speicherloch zu verhindern. gup
+            i++;
+
+            // Array auf definierten Wert kürzen
+            if (this.content.length > this.historyLength) {
+              console.log('History gekürzt von ' + this.content.length + ' auf ' + this.historyLength + ' Elemente')
+              this.content.shift(); // Problem: Es muss evtl. viel mehr gekürzt werden, weil das Array viel länger ist. TODO! 
+            }
+
+          }
+        }
+        catch {
+          // Eigentlich nur gebaut, um den Fehler wegen leerem date herauszubekommen gup
+        }
       }
     )
 
-    // Formatierung aller Elemente aus dem REST-Service
-    // value = '<span class="myNick"><strong>'+this.nickName+": </strong></span>"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>'+this.tstamp+'</small></span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline;
-
-    console.log('set history');
-    //this.content.push(value.);
-    // Array auf definierten Wert kürzen
-    if (this.content.length > this.historyLength) {
-      console.log('History gekürzt von ' + this.content.length + ' auf ' + this.historyLength + ' Elemente')
-      this.content.shift();
-    }
 
   }
 
