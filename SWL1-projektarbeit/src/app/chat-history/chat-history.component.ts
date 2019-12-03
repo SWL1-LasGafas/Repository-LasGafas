@@ -21,7 +21,7 @@ export class ChatHistoryComponent implements DoCheck {
     setInterval(() => { 
       this.getHistory(); 
       this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
-    }, 20000); // Polling
+    }, 2000); // Polling
   }
 
   public content: string[] = [];
