@@ -79,4 +79,5 @@ export class ChatBarComponent implements OnInit {
     }
     this.chatText = '';
   }
+
 }
