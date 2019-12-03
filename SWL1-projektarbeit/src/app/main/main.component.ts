@@ -37,9 +37,12 @@ export class MainComponent implements OnInit {
   nickChange(event: any): void {
     console.log("Nickname Change");
     if (this.pService.nickInvalid < 1) { 
-      if (this.pService.myOldNickname) { // Nur melden, wenn vorher ein Nickname gesetzt war
+      if ((this.pService.myOldNickname) && (this.pService.myOldNickname != this.pService.myNickname)) { // Nur melden, wenn vorher ein Nickname gesetzt war und der anders war
         console.log("Nick gesetzt und OK!");
         this.systemMsg("** " + this.pService.myOldNickname + " ändert Nickname auf " + this.pService.myNickname + " **");
+      }
+      else {
+        console.log('Nickname-Change nicht gemeldet!');
       }
       this.errorMsg = '';
       this.nickSet = true;
