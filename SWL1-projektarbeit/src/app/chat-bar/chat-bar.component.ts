@@ -13,10 +13,8 @@ export class ChatBarComponent implements OnInit {
 
   chatText:string = ''; // Enthält nur die Message aus dem Feld
   chatMsgObj:Message = new Message(); // Enthält nickname und message (kein date! Das macht der Server dann!)
-  newline:string = "\n"; // Wandert später in chat-history rüber
-  public nickName:string = "";
+  nickName:string = "";
   isOK:boolean=false;
-  tstamp:string='';
 
   ngOnInit() {
   }
@@ -66,23 +64,12 @@ export class ChatBarComponent implements OnInit {
 
   sendChat() {
     
-    var dt = new Date(); // wandert in chat-history
-    var monthnames:string[]=["Januar","Februar","März","April","Mai","Juni","Juli", "August", "September", "Oktober", "November", "Dezember"]; // wandert in chat-history
-
-    // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
-    //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
-
-    this.nickName = this.pService.myNickname;
-    this.tstamp = this.pad(dt.getDate(),1)+'. '+ monthnames[dt.getMonth()]+ ' '+ dt.getFullYear()+', '+this.pad(dt.getHours(),2)+':'+this.pad(dt.getMinutes(),2)+' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
-    // Hier finden Reinigung und Montage des Textes statt.
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt etwas drin steht, natürlich
     {
       // Hier wird neu nur noch ein Message-Objekt erstellt und der gesamte Zusammenbau findet erst in chat-history statt, wo alles über den REST-Service geht.
       this.chatMsgObj.nickname = this.pService.myNickname;
       this.chatMsgObj.message = this.chatText.trim();
       this.chatMessage = this.chatMsgObj;
-
-      // Wandert in chat-history: this.chatMessage = '<span class="myNick"><strong>'+this.nickName+": </strong></span>"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>'+this.tstamp+'</small></span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline; // Neu nur noch den einen Text rüberschicken und in main zusammenbauen
     }
     this.chatText = '';
   }
