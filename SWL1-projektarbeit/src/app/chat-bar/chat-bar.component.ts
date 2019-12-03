@@ -75,7 +75,7 @@ export class ChatBarComponent implements OnInit {
       // chat-history hatte Probleme, die Beiträge zu senden. Deshalb wird der REST-Service jetzt doch schon hier angesprochen.
       if (this.chatMsgObj) { // Es gibt leere Einträge auf dem Chatserver. Das lässt darauf schliessen, dass POST-Requests mit leerem Zeug kommen.
         console.log('Start schreiben History...');
-        this.chatService.addToHistory(this.chatMsgObj).subscribe( // Es schreibt bislang nur den ersten Eintrag, danach kommt nicht mehr viel in den REST-Server rein
+        this.chatService.addToHistory(this.chatMsgObj).subscribe( 
           (response: Message) => {
             console.log('History add: ' + response.message);
           }

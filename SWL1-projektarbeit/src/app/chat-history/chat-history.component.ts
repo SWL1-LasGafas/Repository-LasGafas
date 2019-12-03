@@ -1,8 +1,10 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 //import { AppComponent } from '../app.component';
 import { ConfigurationService } from '../configuration.service';
+import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
+import { randomBytes } from 'crypto';
 
 @Component({
   selector: 'app-chat-history',
@@ -13,13 +15,13 @@ import { Message } from '../message'
 
 export class ChatHistoryComponent implements DoCheck {
 
-  constructor(public cService: ConfigurationService, public chatService: ChatserverService) { }
+  constructor(public cService: ConfigurationService, public chatService: ChatserverService, public pService: PersonService,) { }
 
   ngOnInit() {
     setInterval(() => { 
       this.getHistory(); 
-      this.scrollTop(); // Leider geht das Scrolling jetzt *schon wieder nicht*
-    }, 2000); // Polling
+      this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
+    }, 20000); // Polling
   }
 
   public content: string[] = [];
@@ -31,7 +33,7 @@ export class ChatHistoryComponent implements DoCheck {
 
   scrollTop() {
     console.log("Scrolling down");
-    document.getElementById("myForm").scrollTop = document.getElementById("myForm").scrollHeight;
+    document.getElementById("myForm").scrollTop = document.getElementById("myForm").scrollHeight; // möglicherweise wird die Funktion mit der anpassung in chat-history.component.html überflüssig
   }
 
   // Diese Funktion hängt führende Nullen an. Mit Berücksichtigung Vorzeichen
@@ -51,6 +53,8 @@ export class ChatHistoryComponent implements DoCheck {
         // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
 
         var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wanderte in chat-history
+        var nickClass: string[] = ['myNick','nick1','nick2','nick3'];
+        var nickIndex: number = 1;
 
         // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
         //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
@@ -63,7 +67,14 @@ export class ChatHistoryComponent implements DoCheck {
             this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
             // Hier findet die Montage des Textes statt.
-            this.content.push('<span class="myNick"><strong>' + this.nickName + ": </strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
+            if (this.nickName == this.pService.myNickname)
+            {
+              nickIndex = 0;
+            }
+            else {
+              nickIndex = 2; // Hier müsste dann irgendwas random zugewiesen sein. Das Problem mit https://angular.io/guide/security#xss besteht weiterhin!
+            }
+            this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + ": </strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
             dt = null; // Versuch, ein Speicherloch zu verhindern. gup
             i++;
 
