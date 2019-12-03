@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PersonService } from '../person.service';
+import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
 
 @Component({
@@ -9,7 +10,7 @@ import { Message } from '../message'
 })
 export class ChatBarComponent implements OnInit {
 
-  constructor(public pService: PersonService) { }
+  constructor(public pService: PersonService, public chatService: ChatserverService) { }
 
   chatText:string = ''; // Enthält nur die Message aus dem Feld
   chatMsgObj:Message = new Message(); // Enthält nickname und message (kein date! Das macht der Server dann!)
@@ -70,6 +71,18 @@ export class ChatBarComponent implements OnInit {
       this.chatMsgObj.nickname = this.pService.myNickname;
       this.chatMsgObj.message = this.chatText.trim();
       this.chatMessage = this.chatMsgObj;
+
+      // chat-history hatte Probleme, die Beiträge zu senden. Deshalb wird der REST-Service jetzt doch schon hier angesprochen.
+      if (this.chatMsgObj) { // Es gibt leere Einträge auf dem Chatserver. Das lässt darauf schliessen, dass POST-Requests mit leerem Zeug kommen.
+        console.log('Start schreiben History...');
+        this.chatService.addToHistory(this.chatMsgObj).subscribe( // Es schreibt bislang nur den ersten Eintrag, danach kommt nicht mehr viel in den REST-Server rein
+          (response: Message) => {
+            console.log('History add: ' + response.message);
+          }
+        )
+        console.log('Ende schreiben History...');
+      }
+  
     }
     this.chatText = '';
   }

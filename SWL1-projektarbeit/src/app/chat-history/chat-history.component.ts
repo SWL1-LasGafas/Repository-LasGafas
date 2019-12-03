@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 //import { AppComponent } from '../app.component';
 import { ConfigurationService } from '../configuration.service';
 import { ChatserverService } from '../chatserver.service';
@@ -14,6 +14,10 @@ import { Message } from '../message'
 export class ChatHistoryComponent implements DoCheck {
 
   constructor(public cService: ConfigurationService, public chatService: ChatserverService) { }
+
+  ngOnInit() {
+    setInterval(() => { this.getHistory(); }, 10000); // Polling
+  }
 
   public content: string[] = [];
   public historyLength: number = this.cService.historyMaxLength; // Bezieht Infos aus dem Configuration Service
@@ -34,18 +38,8 @@ export class ChatHistoryComponent implements DoCheck {
     return sign + new Array(size).concat([Math.abs(val)]).join('0').slice(-size);
   }
 
-  @Input()
-  set chatHistory(chatMsgObj: Message) {
-    // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
-    // Hier wird der neue Beitrag auf den REST-Server hochgeladen
-    if (chatMsgObj) { // Es gibt leere Einträge auf dem Chatserver. Das lässt darauf schliessen, dass POST-Requests mit leerem Zeug kommen.
-      this.chatService.addToHistory(chatMsgObj).subscribe( // Es schreibt bislang nur den ersten Eintrag, danach kommt nicht mehr viel in den REST-Server rein
-        (response: Message) => {
-          console.log('History add: ' + response.message);
-        }
-      )
-    }
-
+  getHistory() {
+    console.log('Start lesen History...');
     // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
     this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
     this.chatService.getHistory().subscribe(
@@ -53,7 +47,7 @@ export class ChatHistoryComponent implements DoCheck {
         console.log('REST server gave back ' + response);
         // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
 
-        var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wandert in chat-history
+        var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wanderte in chat-history
 
         // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
         //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
@@ -66,7 +60,7 @@ export class ChatHistoryComponent implements DoCheck {
             this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
             // Hier findet die Montage des Textes statt.
-            this.content.push('<span class="myNick"><strong>' + this.nickName + ": </strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[0].message + '</span>' + this.newline);
+            this.content.push('<span class="myNick"><strong>' + this.nickName + ": </strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
             dt = null; // Versuch, ein Speicherloch zu verhindern. gup
             i++;
 
@@ -83,6 +77,27 @@ export class ChatHistoryComponent implements DoCheck {
         }
       }
     )
+    console.log('Ende lesen History...');
+    this.scrollTop();
+  }
+
+  @Input()
+  set chatHistory(chatMsgObj: Message) {
+    console.log('chat-history: @Input starts');
+    /*
+    // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
+    // Hier wird der neue Beitrag auf den REST-Server hochgeladen
+    if (chatMsgObj) { // Es gibt leere Einträge auf dem Chatserver. Das lässt darauf schliessen, dass POST-Requests mit leerem Zeug kommen.
+      console.log('Start schreiben History...');
+      this.chatService.addToHistory(chatMsgObj).subscribe( // Es schreibt bislang nur den ersten Eintrag, danach kommt nicht mehr viel in den REST-Server rein
+        (response: Message) => {
+          console.log('History add: ' + response.message);
+        }
+      )
+      console.log('Ende schreiben History...');
+    }
+    */
+
 
 
   }
