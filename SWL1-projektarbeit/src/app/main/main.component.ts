@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../person.service';
+import { ChatserverService } from '../chatserver.service';
+import { Message } from '../message'
 
 @Component({
   selector: 'app-main',
@@ -8,7 +10,7 @@ import { PersonService } from '../person.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(public pService: PersonService) { }
+  constructor(public pService: PersonService, public chatService: ChatserverService) { }
 
   initialText: string = "...";
   messageText: string = "";
@@ -21,22 +23,33 @@ export class MainComponent implements OnInit {
   }
 
   systemMsg(msg: string) {
-    this.historyText = '<span class="systemMsg">' + msg + '</span>';
+    // Umstellung auf REST-Service. Meldung wird direkt an den Server geschickt.
+    var sysMsg:Message= new Message();
+    sysMsg.nickname='';
+    sysMsg.message = '<span class="systemMsg">' + msg + '</span>';
+    this.chatService.addToHistory(sysMsg).subscribe(
+      (response: Message) => {
+        console.log('History add System Message: ' + response.message);
+      }
+    )
   }
 
   nickChange(event: any): void {
     console.log("Nickname Change");
     if (this.pService.nickInvalid < 1) { 
-      if (this.pService.myOldNickname) { // Nur melden, wenn vorher ein Nickname gesetzt war
+      if ((this.pService.myOldNickname) && (this.pService.myOldNickname != this.pService.myNickname)) { // Nur melden, wenn vorher ein Nickname gesetzt war und der anders war
         console.log("Nick gesetzt und OK!");
         this.systemMsg("** " + this.pService.myOldNickname + " ändert Nickname auf " + this.pService.myNickname + " **");
+      }
+      else {
+        console.log('Nickname-Change nicht gemeldet!');
       }
       this.errorMsg = '';
       this.nickSet = true;
     }
     else {
       console.log('Invalid Nick detected! '+this.pService.nickInvalid);
-      this.errorMsg = 'Nickname ungültig. Bitte auch Buchstaben verwenden! Keine Leerzeichen! Mindestens 4, Maximal 10 Zeichen!';  // systemMsg geht nicht, weil nicht davon ausgegangen werden kann, dass die chathistory überhaupt schon sichtbar ist.
+      this.errorMsg = 'Nickname ungültig. Bitte auch Buchstaben verwenden! Leerzeichen sind nicht erlaubt! Mindestens 4 Zeichen! Maximal 10 Zeichen!';  // systemMsg geht nicht, weil nicht davon ausgegangen werden kann, dass die chathistory überhaupt schon sichtbar ist.
     }
   }
 

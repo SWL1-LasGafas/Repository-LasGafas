@@ -10,7 +10,7 @@ export class ChatserverService {
 
   constructor(public http: HttpClient) { }
 
-  actionUrl:string='https://swl1-lasgafas-testapp.herokuapp.com/api/history';
+  actionUrl: string = 'https://swl1-lasgafas-testapp.herokuapp.com/api/history';
 
   public addToHistory(message: Message): Observable<Message> {
     const options = {
@@ -22,4 +22,6 @@ export class ChatserverService {
   public getHistory(): Observable<Message> {
     return this.http.get<Message>(this.actionUrl);
   }
+
+
 }
