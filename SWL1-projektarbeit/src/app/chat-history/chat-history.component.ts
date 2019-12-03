@@ -38,15 +38,15 @@ export class ChatHistoryComponent implements DoCheck {
   set chatHistory(value: Message) {
     // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
     // Hier wird der neue Beitrag auf den REST-Server hochgeladen
-
+    console.log('History add: '+this.chatService.addToHistory(value));
 
     // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
     this.chatService.getHistory().subscribe(
       (response: Message) => {
-        console.log('REST server gave back ' + response[0].nickname + " " + response[0].date + " " + response[0].message);
+        console.log('REST server gave back ' + response);
         // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
         
-        var dt = new Date(); // wandert in chat-history
+        var dt = new Date(response[0].date); // wandert in chat-history
         var monthnames:string[]=["Januar","Februar","März","April","Mai","Juni","Juli", "August", "September", "Oktober", "November", "Dezember"]; // wandert in chat-history
     
         // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
