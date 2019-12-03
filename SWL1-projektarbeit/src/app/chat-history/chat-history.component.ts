@@ -24,7 +24,25 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   @Input()
-  set chatHistory(value:string) {  // Jetzt ist es nicht mehr möglich, zweimal exakt den gleichen Text zu senden. Das empfinde ich aber als gute Flood Protection und belasse es deshalb
+  set chatHistory(value:string) {  
+    // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
+    // Hier wird der neue Beitrag auf den REST-Server hochgeladen
+
+
+    // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
+    this.chatService.getHistory().subscribe(
+      (response:Message)=>{
+      console.log('REST server gave back '+response[0].nickname+" "+response[0].date+" "+response[0].message);
+      // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
+      this.content["nickname"]=response.nickname;
+      this.content["date"]=response.date;
+      this.content["message"]=response.message;
+      }
+    )
+    
+    // Formatierung aller Elemente aus dem REST-Service
+    // value = '<span class="myNick"><strong>'+this.nickName+": </strong></span>"+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>'+this.tstamp+'</small></span>'+this.newline+'<span class="chatText">'+this.chatText.trim()+'</span>'+this.newline;
+
     console.log('set history');
     this.content.push(value);
     // Array auf definierten Wert kürzen
@@ -33,11 +51,6 @@ export class ChatHistoryComponent implements DoCheck {
       this.content.shift();
     }
     
-    this.chatService.getHistory().subscribe(
-      (response:Message)=>{
-      console.log('REST server gave back'+response);
-      }
-    )
   }
 
   ngDoCheck()
