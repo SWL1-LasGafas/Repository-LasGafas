@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div id="chatarea" class="col-12">
-            <ul class="list-group" id="myForm">
+            <ul class="list-group overflow-auto" id="myForm" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                 <li class="list-group-item" *ngFor="let message of content">
                     <div [innerHTML]="message" class="chatmessage"></div>
                 </li>

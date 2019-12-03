@@ -16,7 +16,10 @@ export class ChatHistoryComponent implements DoCheck {
   constructor(public cService: ConfigurationService, public chatService: ChatserverService) { }
 
   ngOnInit() {
-    setInterval(() => { this.getHistory(); }, 10000); // Polling
+    setInterval(() => { 
+      this.getHistory(); 
+      this.scrollTop(); // Leider geht das Scrolling jetzt *schon wieder nicht*
+    }, 2000); // Polling
   }
 
   public content: string[] = [];
@@ -78,7 +81,6 @@ export class ChatHistoryComponent implements DoCheck {
       }
     )
     console.log('Ende lesen History...');
-    this.scrollTop();
   }
 
   @Input()
