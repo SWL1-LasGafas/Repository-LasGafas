@@ -28,7 +28,7 @@ export class ChatHistoryComponent implements DoCheck {
   newline: string = "\n";
   tstamp: string = '';
   nickName: string = "";
-
+  public hashlist: string[] = [];
 
   scrollTop() {
     console.log("Scrolling down");
@@ -45,7 +45,7 @@ export class ChatHistoryComponent implements DoCheck {
   getHistory() {
     console.log('Start lesen History...');
     // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
-    this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
+    // this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
     this.chatService.getHistory().subscribe(
       (response: Message) => {
         console.log('REST server gave back ' + response);
@@ -60,7 +60,7 @@ export class ChatHistoryComponent implements DoCheck {
         var i = 0;
         try {
           while (response[i].date) { // Das date wird vom Server gesetzt und sollte so bei jedem Beitrag vorhanden sein.
-            console.log('Add history element ' + i);
+            console.log('Check history element ' + i);
             var dt = new Date(response[i].date); // Jedes Mal mit dem Datum des Beitrags initialisiert
             this.nickName = response[i].nickname;
             this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
@@ -73,7 +73,12 @@ export class ChatHistoryComponent implements DoCheck {
             else {
               nickIndex = 2; // Hier müsste dann irgendwas random zugewiesen sein. Das Problem mit https://angular.io/guide/security#xss besteht weiterhin!
             }
-            this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
+
+            if (!this.hashlist.find(element => element==response[i].hash) ) { // prüft, ob es den md5-hash schon gibt
+              console.log('hash '+response[i].hash+' neu. Post hinzugefügt.');
+              this.hashlist.push(response[i].hash);
+              this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
+            }
             dt = null; // Versuch, ein Speicherloch zu verhindern. gup
             i++;
 
