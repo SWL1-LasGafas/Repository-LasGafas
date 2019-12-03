@@ -4,7 +4,6 @@ import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
-import { randomBytes } from 'crypto';
 
 @Component({
   selector: 'app-chat-history',
@@ -21,7 +20,7 @@ export class ChatHistoryComponent implements DoCheck {
     setInterval(() => { 
       this.getHistory(); 
       this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
-    }, 2000); // Polling
+    }, this.cService.historyPolling); // Polling
   }
 
   public content: string[] = [];
