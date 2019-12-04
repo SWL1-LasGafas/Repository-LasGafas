@@ -43,9 +43,16 @@ strong {
     text-decoration:bold;
     color:#dddddd;
 }
+
 small {
     font-size: 10pt;
 }
+
+.myNick {
+    color:rebeccapurple;
+    text-decoration:underline;
+}
+
 
 /* Rote scrollbar */
 /* width */

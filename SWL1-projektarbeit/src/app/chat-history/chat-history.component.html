@@ -3,7 +3,7 @@
         <div id="chatarea" class="col-12">
             <ul class="list-group overflow-auto" id="myForm" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                 <li class="list-group-item" *ngFor="let message of content">
-                    <div [innerHTML]="message" class="chatmessage"></div>
+                    <div class="chatmessage"><span class="myNick">{{message.nickname}}</span><span>{{message.date}}</span><br><span>{{message.message}}</span></div>
                 </li>
             </ul>
         </div>
