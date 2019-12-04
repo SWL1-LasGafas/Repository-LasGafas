@@ -4,6 +4,7 @@ import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-chat-history',
@@ -28,6 +29,7 @@ export class ChatHistoryComponent implements DoCheck {
   newline: string = "\n";
   tstamp: string = '';
   nickName: string = "";
+  color: string;
   public hashlist: string[] = [];
 
   scrollTop() {

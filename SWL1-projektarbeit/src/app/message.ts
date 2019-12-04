@@ -3,4 +3,5 @@ export class Message {
     public message:string = '';
     public date:string = '';
     public hash:string = '';
+    public color:string = '';
 }

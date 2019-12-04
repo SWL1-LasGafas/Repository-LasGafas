@@ -16,6 +16,7 @@ export class NickNameComponent implements OnInit {
 
   nickName: string = "";
   isOK: boolean = false;
+  color: string;
 
   checkNickname(value: string): boolean {
 
@@ -64,6 +65,7 @@ export class NickNameComponent implements OnInit {
       if (this.pService.myNickname != this.nickName) {
         this.pService.myOldNickname = this.pService.myNickname;
         this.pService.myNickname = this.nickName;
+        this.pService.nicknameColor = this.getRandomColor(); //sollte den Nickname farbig hinterlegen
         console.log("Nickname von " + this.pService.myOldNickname + ' nach ' + this.nickName);
         this.pService.nickInvalid = 0;
         console.log('emitting NickNameChange Event');
@@ -83,4 +85,14 @@ export class NickNameComponent implements OnInit {
 
   }
 
+  getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
 }
+

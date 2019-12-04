@@ -10,6 +10,7 @@ export class PersonService {
   myNickname:string = '';
   myOldNickname:string = '';
   nickInvalid:number = 0;
+  nicknameColor:string = '';
 
   public getNickname(): string {
     return this.myNickname;
@@ -35,6 +36,15 @@ export class PersonService {
   // setter
   public setOldNickname(value:string) {
     this.myOldNickname = value;
+  }
+
+  //nickname color
+  public get colorName(): string {
+    return this.nicknameColor;
+  }
+
+  public set colorName(value:string) {
+    this.nicknameColor = value;
   }
 
 }
