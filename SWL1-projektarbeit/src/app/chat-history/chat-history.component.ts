@@ -68,9 +68,9 @@ export class ChatHistoryComponent implements DoCheck {
               this.nickName = response[i].nickname;
               this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
+              // Hier findet die Montage des Textes statt.
               response[i].date = this.tstamp; // Formatierten Timestamp übergeben
 
-              // Hier findet die Montage des Textes statt.
               if (this.nickName == this.pService.myNickname) {
                 response[i].position = "right";
                 response[i].color = nickClass[0]; // Die Standardfarbe für den eigenen Nickname
@@ -78,6 +78,14 @@ export class ChatHistoryComponent implements DoCheck {
               else {
                 response[i].position = "left";
                 response[i].color = nickClass[1]; // Hier müsste jedem Nick, den es gibt, eine andere Farbe zugewiesen werden. Zum Beispiel ASCII-Wert des Strings mod(irgendwas) TODO.
+              }
+
+              // Ausblenden des Nicks, wenn der oben der gleiche ist
+              if ((i>0) && (response[i-1].nickname != response[i].nickname)) {
+                response[i].shownick = response[i].nickname;
+              }
+              else {
+                response[i].shownick = '';
               }
 
               if (!this.hashlist.find(element => element == response[i].hash)) { // prüft, ob es den md5-hash schon gibt
