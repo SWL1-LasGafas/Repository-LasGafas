@@ -39,20 +39,78 @@
 }
 
 /* Chat-Message */
-strong {
+.myNick {
+    margin-right: 50px;
     text-decoration:bold;
-    color:#dddddd;
+    color:#110000;
+}
+.nick1 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#222222;
+}
+.nick2 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#444444;
+}
+.nick3 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#666666;
+}
+.nick4 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#888888;
+}
+.nick5 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#aa7777;
+}
+.nick6 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#bbaaaa;
+}
+.nick7 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#cc0000;
+}
+.nick8 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#dd3333;
+}
+.nick9 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#aa0000;
+}
+.nick0 {
+    margin-right: 50px;
+    text-decoration:bold;
+    color:#bb2222;
 }
 
-small {
+
+.tstamp {
     font-size: 10pt;
 }
 
-.myNick {
-    color:rebeccapurple;
-    text-decoration:underline;
+.chatText {
+    text-decoration:none;
 }
 
+.left {
+    text-align:left;
+}
+
+.right {
+    text-align:right;
+}
 
 /* Rote scrollbar */
 /* width */

@@ -15,11 +15,11 @@ import { stringify } from 'querystring';
 
 export class ChatHistoryComponent implements DoCheck {
 
-  constructor(public cService: ConfigurationService, public chatService: ChatserverService, public pService: PersonService,) { }
+  constructor(public cService: ConfigurationService, public chatService: ChatserverService, public pService: PersonService, ) { }
 
   ngOnInit() {
-    setInterval(() => { 
-      this.getHistory(); 
+    setInterval(() => {
+      this.getHistory();
       this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
     }, this.cService.historyPolling); // Polling
   }
@@ -46,58 +46,63 @@ export class ChatHistoryComponent implements DoCheck {
 
   getHistory() {
     console.log('Start lesen History...');
-    // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
-    // this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
-    this.chatService.getHistory().subscribe(
-      (response: Message) => {
-        console.log('REST server gave back ' + response);
-        // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
+    if (this.pService.myNickname) { // Lädt erst etwas, wenn es einen lokalen Nickname gibt
+      // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
+      // this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
+      this.chatService.getHistory().subscribe(
+        (response: Message) => {
+          console.log('REST server gave back ' + response);
+          // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
 
-        var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wanderte in chat-history
-        var nickClass: string[] = ['myNick','nick1','nick2','nick3'];
-        var nickIndex: number = 1;
+          var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wanderte in chat-history
+          var nickClass: string[] = ['myNick', 'nick1', 'nick2', 'nick3', 'nick4', 'nick5', 'nick6', 'nick7', 'nick8', 'nick9', 'nick0'];
+          var nickIndex: number = 1; // Evtl. kann aus dem Nickname eine Index-Nummer kalkuliert werden (Quersumme, Modulo o.ä.)
 
-        // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
-        //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
-        var i = 0;
-        try {
-          while (response[i].date) { // Das date wird vom Server gesetzt und sollte so bei jedem Beitrag vorhanden sein.
-            console.log('Check history element ' + i);
-            var dt = new Date(response[i].date); // Jedes Mal mit dem Datum des Beitrags initialisiert
-            this.nickName = response[i].nickname;
-            this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
+          // Test für die Funktion pad(). Könnte für automatisierte Tests verwendet werden.
+          //console.log("Funktionstest pad: -5-->"+this.pad(-5,2)+" und 8-->"+this.pad(8,2));
+          var i = 0;
+          try {
+            while (response[i].date) { // Das date wird vom Server gesetzt und sollte so bei jedem Beitrag vorhanden sein.
+              console.log('Check history element ' + i);
+              var dt = new Date(response[i].date); // Jedes Mal mit dem Datum des Beitrags initialisiert
+              this.nickName = response[i].nickname;
+              this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
-            // Hier findet die Montage des Textes statt.
-            if (this.nickName == this.pService.myNickname)
-            {
-              nickIndex = 0;
+              response[i].date = this.tstamp; // Formatierten Timestamp übergeben
+
+              // Hier findet die Montage des Textes statt.
+              if (this.nickName == this.pService.myNickname) {
+                response[i].position = "right";
+                response[i].color = nickClass[0]; // Die Standardfarbe für den eigenen Nickname
+              }
+              else {
+                response[i].position = "left";
+                response[i].color = nickClass[1]; // Hier müsste jedem Nick, den es gibt, eine andere Farbe zugewiesen werden. Zum Beispiel ASCII-Wert des Strings mod(irgendwas) TODO.
+              }
+
+              if (!this.hashlist.find(element => element == response[i].hash)) { // prüft, ob es den md5-hash schon gibt
+                console.log('hash ' + response[i].hash + ' neu. Post hinzugefügt.');
+                this.hashlist.push(response[i].hash);
+                //this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
+                this.content.push(response[i]);
+              }
+              dt = null; // Versuch, ein Speicherloch zu verhindern. gup
+              i++;
+
+              // Array auf definierten Wert kürzen
+              if (this.content.length > this.historyLength) {
+                console.log('History gekürzt von ' + this.content.length + ' auf ' + this.historyLength + ' Elemente')
+                this.content.shift(); // Problem: Es muss evtl. viel mehr gekürzt werden, weil das Array viel länger ist. TODO! 
+              }
+
             }
-            else {
-              nickIndex = 2; // Hier müsste dann irgendwas random zugewiesen sein. Das Problem mit https://angular.io/guide/security#xss besteht weiterhin!
-            }
-
-            if (!this.hashlist.find(element => element==response[i].hash) ) { // prüft, ob es den md5-hash schon gibt
-              console.log('hash '+response[i].hash+' neu. Post hinzugefügt.');
-              this.hashlist.push(response[i].hash);
-              //this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
-              this.content.push(response[i]);
-            }
-            dt = null; // Versuch, ein Speicherloch zu verhindern. gup
-            i++;
-
-            // Array auf definierten Wert kürzen
-            if (this.content.length > this.historyLength) {
-              console.log('History gekürzt von ' + this.content.length + ' auf ' + this.historyLength + ' Elemente')
-              this.content.shift(); // Problem: Es muss evtl. viel mehr gekürzt werden, weil das Array viel länger ist. TODO! 
-            }
-
+          }
+          catch {
+            // Eigentlich nur gebaut, um den Fehler wegen leerem date herauszubekommen gup
           }
         }
-        catch {
-          // Eigentlich nur gebaut, um den Fehler wegen leerem date herauszubekommen gup
-        }
-      }
-    )
+      )
+    }
     console.log('Ende lesen History...');
   }
 

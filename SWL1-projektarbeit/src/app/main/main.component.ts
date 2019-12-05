@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
     // Umstellung auf REST-Service. Meldung wird direkt an den Server geschickt.
     var sysMsg:Message= new Message();
     sysMsg.nickname='';
-    sysMsg.message = '<span class="systemMsg">' + msg + '</span>';
+    sysMsg.message = msg; // Formatierungsanweisungen mitgeben haut nicht hin (gup)
     this.chatService.addToHistory(sysMsg).subscribe(
       (response: Message) => {
         console.log('History add System Message: ' + response.message);
