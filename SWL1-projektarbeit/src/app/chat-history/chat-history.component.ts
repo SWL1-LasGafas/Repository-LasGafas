@@ -77,7 +77,7 @@ export class ChatHistoryComponent implements DoCheck {
               }
               else {
                 response[i].position = "left";
-                response[i].color = nickClass[((response[i].nickname.charCodeAt(0)+response[i].nickname.charCodeAt(1)+response[i].nickname.charCodeAt(2)+response[i].nickname.charCodeAt(3)) % 10)+1]; // Hier müsste jedem Nick, den es gibt, eine andere Farbe zugewiesen werden. Zum Beispiel ASCII-Wert des Strings mod(irgendwas) TODO.
+                response[i].color = nickClass[((response[i].nickname.charCodeAt(0)+response[i].nickname.charCodeAt(1)+response[i].nickname.charCodeAt(2)+response[i].nickname.charCodeAt(3)) % 10)+1]; // Hier wird aus den ersten 4 Zeichen mit modulo ein Index für die zuzuweisende Farbe gebildet.
               }
 
               // Ausblenden des Nicks, wenn der oben der gleiche ist
