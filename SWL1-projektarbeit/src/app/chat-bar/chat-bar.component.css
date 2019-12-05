@@ -9,17 +9,19 @@
 
 #chatfeld {
     position: relative;
-    top: 20px;
+    top: 30px;
     background-color: #f8f9fa;
     width: 100%;
     height: 45px;
     border: 2px solid black;
     border-radius: 10px;
+    display: inline;
 }
 
 #sendebutton {
     position: relative;
-    top: 40px;
+    top: 30px;
+    display: inline;
 }
 
 @media (max-height: 700px) {

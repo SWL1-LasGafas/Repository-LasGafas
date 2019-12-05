@@ -1,6 +1,6 @@
 #chatarea {
     position: relative;
-    top: -10px;
+    top: 20px;
 }
 
 #myForm {
@@ -9,9 +9,10 @@
     color: black;
     background-color: #f8f9fa;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 270px;
+    height: 430px;
     width: 100%;
     overflow-y: auto;
+    overflow-x: auto;
     color: black;
     border: 2px solid black;
     border-radius: 10px;
@@ -42,66 +43,78 @@
 .myNick {
     margin-right: 50px;
     text-decoration:bold;
+    font-size: 17pt;
     color: limegreen;
 }
 .nick1 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#aa2200;
+    font-size: 17pt;
+    color: yellow;
 }
 .nick2 {
     margin-right: 50px;
     text-decoration:bold;
+    font-size: 17pt;
     color:darkblue;
 }
 .nick3 {
     margin-right: 50px;
     text-decoration:bold;
+    font-size: 17pt;
     color: violet;
 }
 .nick4 {
     margin-right: 50px;
     text-decoration:bold;
+    font-size: 17pt;
     color: skyblue;
 }
 .nick5 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#aa7777;
+    font-size: 17pt;
+    color:pink;
 }
 .nick6 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#bbaaaa;
+    font-size: 17pt;
+    color: tomato;
 }
 .nick7 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#cc0000;
+    font-size: 17pt;
+    color:olive;
 }
 .nick8 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#dd3333;
+    font-size: 17pt;
+    color: orange;
 }
 .nick9 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#aa0000;
+    font-size: 17pt;
+    color: darkviolet;
 }
 .nick0 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#bb2222;
+    font-size: 17pt;
+    color: goldenrod;
 }
 
 
 .tstamp {
     font-size: 10pt;
+    font-family: cursive;
 }
 
 .chatText {
-    text-decoration:none;
+    text-decoration: ita
 }
 
 .left {
