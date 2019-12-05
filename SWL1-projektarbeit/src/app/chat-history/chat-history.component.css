@@ -42,7 +42,7 @@
 .myNick {
     margin-right: 50px;
     text-decoration:bold;
-    color:#110000;
+    color: limegreen;
 }
 .nick1 {
     margin-right: 50px;
@@ -52,17 +52,17 @@
 .nick2 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#444444;
+    color:darkblue;
 }
 .nick3 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#666666;
+    color: violet;
 }
 .nick4 {
     margin-right: 50px;
     text-decoration:bold;
-    color:#888888;
+    color: skyblue;
 }
 .nick5 {
     margin-right: 50px;
