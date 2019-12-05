@@ -62,18 +62,18 @@ export class NickNameComponent implements OnInit {
   setNickname() {
     this.nickName = this.nickName.trim();
     if (this.checkNickname(this.nickName)) {
-      if (this.pService.myNickname != this.nickName) {
+      //if (this.pService.myNickname != this.nickName) { // Prüfung auf identischen Nick geht hier nicht, weil in main ein Fehler ausgegeben werden muss
         this.pService.myOldNickname = this.pService.myNickname;
         this.pService.myNickname = this.nickName;
-        this.pService.nicknameColor = this.getRandomColor(); //sollte den Nickname farbig hinterlegen
+        this.pService.nicknameColor = this.getRandomColor(); //sollte den Nickname farbig hinterlegen (Ist wohl veraltet und kann wieder weg. In chat-history gelöst mit CSS-Klassen)
         console.log("Nickname von " + this.pService.myOldNickname + ' nach ' + this.nickName);
         this.pService.nickInvalid = 0;
         console.log('emitting NickNameChange Event');
         this.nickNameChange.emit(this.nickName);
-      }
-      else {
-        console.log("Nickname identisch!");
-      }
+      //}
+      //else {
+      //  console.log("Nickname identisch!");
+      //}
     }
     else {
       console.log("Nickname " + this.nickName + " ungültig!");
