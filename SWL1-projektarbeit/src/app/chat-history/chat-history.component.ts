@@ -80,7 +80,13 @@ export class ChatHistoryComponent implements DoCheck {
                 response[i].color = nickClass[1]; // Hier müsste jedem Nick, den es gibt, eine andere Farbe zugewiesen werden. Zum Beispiel ASCII-Wert des Strings mod(irgendwas) TODO.
               }
 
-              // Ansatz für das Ausblenden des Nicks, wenn der oben der gleiche ist: 1. Message-Objekt um Anzeige-Nick ergänzen 2. Anzeige-Nick = nickname wenn response[i-1].nickname != response[i].nickname, sonst = ''
+              // Ausblenden des Nicks, wenn der oben der gleiche ist
+              if ((i>0) && (response[i-1].nickname != response[i].nickname)) {
+                response[i].shownick = response[i].nickname;
+              }
+              else {
+                response[i].shownick = '';
+              }
 
               if (!this.hashlist.find(element => element == response[i].hash)) { // prüft, ob es den md5-hash schon gibt
                 console.log('hash ' + response[i].hash + ' neu. Post hinzugefügt.');
