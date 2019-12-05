@@ -20,21 +20,21 @@
 
 @media (max-height: 700px) {
     #myForm {
-        height: 210px;
+        height: 340px;
         width: 100%;
     }
 }
 
 @media (max-height: 615px) {
     #myForm {
-        height: 120px;
+        height: 260px;
         width: 100%;
     }
 }
 
 @media (max-height: 500px) {
     #myForm {
-        height: 60px;
+        height: 190px;
         width: 100%;
     }
 }
