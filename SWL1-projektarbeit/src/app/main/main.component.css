@@ -64,6 +64,13 @@
     font-size: 15px;
 }
 
+#werbung {
+    position: relative;
+    top: 30%;
+    height: 30%;
+    width: 100%;
+}
+
 @media (max-height: 700px) {
 
     .container-fluid {
