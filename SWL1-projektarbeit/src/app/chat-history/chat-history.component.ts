@@ -143,7 +143,7 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   ngDoCheck() {
-    this.scrollTop();  // Verhalten etwas suboptimal, weil es jetzt bei jedem einzelnen Tastendruck im Eingabefeld scrollt. Aber es scrollt, immerhin.
+    //this.scrollTop();  // Verhalten etwas suboptimal, weil es jetzt bei jedem einzelnen Tastendruck im Eingabefeld scrollt. Aber es scrollt, immerhin.
   }
 
 }
