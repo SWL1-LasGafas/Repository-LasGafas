@@ -67,7 +67,7 @@ export class ChatBarComponent implements OnInit {
     
     if (this.checkMsg(this.chatText.trim())) // Falls überhaupt etwas drin steht, natürlich
     {
-      // Hier wird neu nur noch ein Message-Objekt erstellt und der gesamte Zusammenbau findet erst in chat-history statt, wo alles über den REST-Service geht.
+      // Hier wird neu mit dem Message Objekt gearbeitet
       this.chatMsgObj.nickname = this.pService.myNickname;
       this.chatMsgObj.message = this.chatText.trim();
       this.chatMessage = this.chatMsgObj;
