@@ -3,6 +3,7 @@ export class Message {
     public message:string = '';
     public date:string = '';
     public hash:string = '';
+    public counter:number = 0; // Message-Zähler vom Server
     // Ausfüllen lokal; nicht auf dem REST-Server
     public color:string = ''; // nickname color
     public position:string = ''; // left, right

@@ -51,7 +51,7 @@ export class ChatHistoryComponent implements DoCheck {
       // this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
       this.chatService.getHistory().subscribe(
         (response: Message) => {
-          console.log('REST server gave back ' + response);
+          console.log('History read response: ' + response);
           // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
 
           var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wanderte in chat-history

@@ -77,7 +77,7 @@ export class ChatBarComponent implements OnInit {
         console.log('Start schreiben History...');
         this.chatService.addToHistory(this.chatMsgObj).subscribe( 
           (response: Message) => {
-            console.log('History add: ' + response.message);
+            console.log('History add: ' + response.message + ' Counter: ' + response.counter);
           }
         )
         console.log('Ende schreiben History...');
