@@ -23,6 +23,26 @@
     display: inline;
 }
 
+#senditbutton {
+    color: #f8f9fa;
+    background: none;
+    border: 2px solid #f8f9fa;
+    border-radius: 5px;
+    height: 35px;
+    width: 100%;
+}
+
+#senditbutton:hover {
+    color: black;
+    background-color: #f8f9fa;
+}
+
+#senditbutton:disabled {
+    color: #f8f9fa98;
+    background: none;
+    border: 2px solid #f8f9fa98;
+}
+
 @media (max-height: 700px) {
     #eingabebereich {
         position: relative;
