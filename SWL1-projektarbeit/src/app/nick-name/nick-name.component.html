@@ -1,8 +1,16 @@
-<div id="nickNameTitle">
-    <p>Setzen Sie einen Nickname!</p>
+<div class="container">
+
+    <div class="row">
+        <div id="nickNameTitle" class="col-xs-3 col-sm-12">
+            <p>Nickname setzen!</p>
+        </div>
+        <div class="col-xs-6 col-sm-12">
+            <input [(ngModel)]="nickName" type="text" id="inputNickname" minlenght=4 maxlength="10"
+                (keyup.enter)="setNickname()" required />
+        </div>
+        <div class="col-xs-3 col-sm-12">
+            <button type="button" id="nickNameButton" class="btn btn-outline-danger" (click)="setNickname()"
+                value="Setzen" [disabled]="!nickName">Setzen</button>
+        </div>
+    </div>
 </div>
-<input [(ngModel)]="nickName" type="text" id="inputNickname" minlenght=4 maxlength="10"
-    (keyup.enter)="setNickname()" required />&nbsp;
-<button type="button" id="nickNameButton" class="btn btn-outline-danger btn-large" (click)="setNickname()" value="Setzen"
-    [disabled]="!nickName">Setzen</button>
-<br />

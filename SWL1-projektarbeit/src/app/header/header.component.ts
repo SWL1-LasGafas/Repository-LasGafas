@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  /*
+
   titleAnimation() {
     let spans = document.querySelectorAll('.word span');
     spans.forEach((span, idx) => {
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit {
       }, 750 * (idx + 1))
     });
   }
+  */
 
 }
 

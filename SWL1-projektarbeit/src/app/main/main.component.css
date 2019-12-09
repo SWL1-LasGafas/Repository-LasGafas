@@ -25,37 +25,11 @@
 }
 
 #mainlinks {
-
+    position: relative;
     color: black;
     background-color: white;
-
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;    
-
-}
-
-/*
-#mainrechts {
-
-    color: black;
-    background-color: white;
-
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-*/
-
-#chatausgabe {
-
-    position: relative;
-    top: 10px;
-    color: white;
-    font-size: 25px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #errorMessage {
@@ -65,13 +39,7 @@
     font-size: 15px;
 }
 
-#werbung {
-    position: relative;
-    top: 30%;
-    height: 30%;
-    width: 100%;
-}
-
+/*
 @media (max-height: 700px) {
 
     .container-fluid {
@@ -142,5 +110,6 @@
     }
 
 }
+*/
 
 
