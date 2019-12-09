@@ -75,6 +75,10 @@ export class ChatHistoryComponent implements DoCheck {
                 response[i].position = "right";
                 response[i].color = nickClass[0]; // Die Standardfarbe für den eigenen Nickname
               }
+              else if (response[i].nickname == '')
+              {
+                // Faktisch gar nichts machen
+              }
               else {
                 response[i].position = "left";
                 response[i].color = nickClass[((response[i].nickname.charCodeAt(0)+response[i].nickname.charCodeAt(1)+response[i].nickname.charCodeAt(2)+response[i].nickname.charCodeAt(3)) % 10)+1]; // Hier wird aus den ersten 4 Zeichen mit modulo ein Index für die zuzuweisende Farbe gebildet.
