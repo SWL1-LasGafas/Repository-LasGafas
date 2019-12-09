@@ -4,7 +4,7 @@ import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
-import { stringify } from 'querystring';
+import { stringify } from 'querystring'; // Wohl jetzt überflüssig, weil nicht mehr mit <string> gearbeitet wird
 
 @Component({
   selector: 'app-chat-history',
@@ -31,6 +31,7 @@ export class ChatHistoryComponent implements DoCheck {
   nickName: string = "";
   color: string;
   public hashlist: string[] = [];
+  msgCounter:number = 0; // Ungefährer Stand des Messagecounters. Könnte auch durch Durchzählen des lokalen Arrays ermittelt werden, aber wird jetzt mal durch chat-bar beim Speichern übergeben.
 
   scrollTop() {
     console.log("Scrolling down");
@@ -45,11 +46,11 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   getHistory() {
-    console.log('Start lesen History...');
+    console.log('Start lesen History mit counter='+this.msgCounter+'...');
     if (this.pService.myNickname) { // Lädt erst etwas, wenn es einen lokalen Nickname gibt
       // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
       // this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
-      this.chatService.getHistory().subscribe(
+      this.chatService.getHistory(this.msgCounter).subscribe(
         (response: Message) => {
           console.log('History read response: ' + response);
           // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
@@ -106,7 +107,10 @@ export class ChatHistoryComponent implements DoCheck {
                 this.content.push(response[i]);
               }
               dt = null; // Versuch, ein Speicherloch zu verhindern. gup
+
+              // Buchhaltung aufaddieren (Schleifenzähler und Counter)
               i++;
+              this.msgCounter=response[i].counter;
 
               // Array auf definierten Wert kürzen
               if (this.content.length > this.historyLength) {
@@ -128,6 +132,7 @@ export class ChatHistoryComponent implements DoCheck {
   @Input()
   set chatHistory(chatMsgObj: Message) {
     console.log('chat-history: @Input starts. Empfange Counter ' + chatMsgObj.counter);
+    this.msgCounter = chatMsgObj.counter; // In der Instanz speichern
     /*
     // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
     // Hier wird der neue Beitrag auf den REST-Server hochgeladen

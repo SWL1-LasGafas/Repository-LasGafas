@@ -30,7 +30,9 @@ export class MainComponent implements OnInit {
     sysMsg.position = "sysmsg";
     this.chatService.addToHistory(sysMsg).subscribe(
       (response: Message) => {
-        console.log('History add System Message: ' + response.message);
+        console.log('History add System Message: ' + response.message + ' mit counter=' + response.counter);
+        // this.msgObj.counter = response.counter; // Counter aufsynchronisieren um Bandbreite sparen zu können
+        // Das funktioniert nicht, ist aber auch kontraproduktiv. chat-history zieht sich ein Mal alles und synchronisiert sich danach selbst mit dem Counter. Wäre der Counter schon im @input würde es den gesendeten Beitrag gar nicht mehr runterziehen; es gäbe ein Loch
       }
     )
   }
