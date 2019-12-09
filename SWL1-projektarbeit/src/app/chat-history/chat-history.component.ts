@@ -20,7 +20,7 @@ export class ChatHistoryComponent implements DoCheck {
   ngOnInit() {
     setInterval(() => {
       this.getHistory();
-      this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
+      //this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
     }, this.cService.historyPolling); // Polling
   }
 
@@ -127,7 +127,7 @@ export class ChatHistoryComponent implements DoCheck {
 
   @Input()
   set chatHistory(chatMsgObj: Message) {
-    console.log('chat-history: @Input starts');
+    console.log('chat-history: @Input starts. Empfange Counter ' + chatMsgObj.counter);
     /*
     // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
     // Hier wird der neue Beitrag auf den REST-Server hochgeladen

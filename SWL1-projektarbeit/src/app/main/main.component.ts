@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
 
   initialText: string = "...";
   messageText: string = "";
-  historyText: string = "";
+  msgObj: Message = new Message();
   nickName: string = "";
   nickSet: boolean = false;
   errorMsg: string = '';
@@ -61,9 +61,12 @@ export class MainComponent implements OnInit {
   }
 
   chatMsg(event: any): void {
-    // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole überfüllt
-    this.historyText = <string>event;
-    this.messageText = "";
+    if (event) // Unklar, wieso ein "undefined"-Objekt hier beim Start übergeben wird. Bringt aber auf jeden Fall nicht viel ausser Fehlermeldungen.
+    {
+      console.log('Übergebe Counter: ' + event.counter);
+      this.msgObj = <Message>event;
+    }
+    //this.messageText = "";
   }
 
 }
