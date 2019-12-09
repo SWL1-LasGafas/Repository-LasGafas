@@ -12,7 +12,7 @@
     height: 430px;
     width: 100%;
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: scroll;
     color: black;
     border: 2px solid black;
     border-radius: 10px;
@@ -113,16 +113,46 @@
     font-family: cursive;
 }
 
-.chatText {
-    text-decoration: ita
-}
+/*
 
 .left {
     text-align:left;
+    color: black;
+    background-color: rgba(200, 65, 40, 1);
+    border: 1px solid rgb(200, 65, 40);
+    border-radius: 5px;
 }
 
 .right {
     text-align:right;
+    color: black;
+    background-color: green;
+    border: 1px solid rgb(200, 65, 40);
+    border-radius: 5px;
+}
+
+*/
+
+.left {
+    float: left;
+    color: black;
+    background-color: #e7ebeb;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 60%;
+    word-wrap:break-word;
+}
+
+.right {
+    float: right;
+    color: black;
+    background-color: rgb(200, 65, 40);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 60%;
+    word-wrap:break-word;
 }
 
 /* Rote scrollbar */
