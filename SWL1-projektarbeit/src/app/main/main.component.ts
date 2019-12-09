@@ -49,6 +49,7 @@ export class MainComponent implements OnInit {
       }
       else {
         console.log('Erster Nickname überhaupt')
+        this.systemMsg("** " + this.pService.myNickname + " hat den Chat betreten! **");
         this.errorMsg = '';
       }
       this.nickSet = true;
