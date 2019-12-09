@@ -27,6 +27,7 @@ export class MainComponent implements OnInit {
     var sysMsg:Message= new Message();
     sysMsg.nickname='';
     sysMsg.message = msg; // Formatierungsanweisungen mitgeben haut nicht hin (gup)
+    sysMsg.position = "sysmsg";
     this.chatService.addToHistory(sysMsg).subscribe(
       (response: Message) => {
         console.log('History add System Message: ' + response.message);
