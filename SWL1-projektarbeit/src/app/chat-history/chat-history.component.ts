@@ -81,11 +81,18 @@ export class ChatHistoryComponent implements DoCheck {
               }
 
               // Ausblenden des Nicks, wenn der oben der gleiche ist
-              if ((i>0) && (response[i-1].nickname != response[i].nickname)) {
-                response[i].shownick = response[i].nickname;
+              if (i>0)
+              {
+                if (response[i-1].nickname != response[i].nickname) {
+                  response[i].shownick = response[i].nickname;
+                }
+                else {
+                  response[i].shownick = '';
+                }
               }
               else {
-                response[i].shownick = '';
+                // Beim ersten Beitrag der Liste den Nick sowieso einblenden
+                response[i].shownick = response[i].nickname;
               }
 
               if (!this.hashlist.find(element => element == response[i].hash)) { // prüft, ob es den md5-hash schon gibt
