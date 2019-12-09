@@ -20,7 +20,7 @@ export class ChatHistoryComponent implements DoCheck {
   ngOnInit() {
     setInterval(() => {
       this.getHistory();
-      //this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
+      //this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten. Hier mal deaktiviert.
     }, this.cService.historyPolling); // Polling
   }
 
