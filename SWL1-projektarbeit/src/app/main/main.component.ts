@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
 
   initialText: string = "...";
   messageText: string = "";
-  historyText: string = "";
+  msgObj: Message = new Message();
   nickName: string = "";
   nickSet: boolean = false;
   errorMsg: string = '';
@@ -30,7 +30,9 @@ export class MainComponent implements OnInit {
     sysMsg.position = "sysmsg";
     this.chatService.addToHistory(sysMsg).subscribe(
       (response: Message) => {
-        console.log('History add System Message: ' + response.message);
+        console.log('History add System Message: ' + response.message + ' mit counter=' + response.counter);
+        // this.msgObj.counter = response.counter; // Counter aufsynchronisieren um Bandbreite sparen zu können
+        // Das funktioniert nicht, ist aber auch kontraproduktiv. chat-history zieht sich ein Mal alles und synchronisiert sich danach selbst mit dem Counter. Wäre der Counter schon im @input würde es den gesendeten Beitrag gar nicht mehr runterziehen; es gäbe ein Loch
       }
     )
   }
@@ -61,9 +63,12 @@ export class MainComponent implements OnInit {
   }
 
   chatMsg(event: any): void {
-    // console.log(<string>event.toUpperCase()); // Ausgeblendet, weil das die Konsole überfüllt
-    this.historyText = <string>event;
-    this.messageText = "";
+    if (event) // Unklar, wieso ein "undefined"-Objekt hier beim Start übergeben wird. Bringt aber auf jeden Fall nicht viel ausser Fehlermeldungen.
+    {
+      console.log('Übergebe Counter: ' + event.counter);
+      this.msgObj = <Message>event;
+    }
+    //this.messageText = "";
   }
 
 }

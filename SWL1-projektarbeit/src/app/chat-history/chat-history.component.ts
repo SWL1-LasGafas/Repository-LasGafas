@@ -4,7 +4,7 @@ import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
-import { stringify } from 'querystring';
+import { stringify } from 'querystring'; // Wohl jetzt überflüssig, weil nicht mehr mit <string> gearbeitet wird
 
 @Component({
   selector: 'app-chat-history',
@@ -20,7 +20,7 @@ export class ChatHistoryComponent implements DoCheck {
   ngOnInit() {
     setInterval(() => {
       this.getHistory();
-      this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten.
+      //this.scrollTop(); // Scrolling hier nützt nichts. In chat-history.component.html gelöst nach Lösung 3 Ch. Baumgarten. Hier mal deaktiviert.
     }, this.cService.historyPolling); // Polling
   }
 
@@ -31,6 +31,7 @@ export class ChatHistoryComponent implements DoCheck {
   nickName: string = "";
   color: string;
   public hashlist: string[] = [];
+  msgCounter:number = 0; // Ungefährer Stand des Messagecounters. Könnte auch durch Durchzählen des lokalen Arrays ermittelt werden, aber wird jetzt mal durch chat-bar beim Speichern übergeben.
 
   scrollTop() {
     console.log("Scrolling down");
@@ -45,13 +46,13 @@ export class ChatHistoryComponent implements DoCheck {
   }
 
   getHistory() {
-    console.log('Start lesen History...');
+    console.log('Start lesen History mit counter='+this.msgCounter+'...');
     if (this.pService.myNickname) { // Lädt erst etwas, wenn es einen lokalen Nickname gibt
       // Die vom REST-Server zusammengebaute Information wird wieder heruntergezogen und weiterverarbeitet
       // this.content = []; // Der Server hat alle Infos und schickt sie wieder rüber. Derzeit zumindest. gup 
-      this.chatService.getHistory().subscribe(
+      this.chatService.getHistory(this.msgCounter).subscribe(
         (response: Message) => {
-          console.log('REST server gave back ' + response);
+          console.log('History read response: ' + response);
           // Hier muss unser Array aus der Serverantwort zusammengebaut werden.
 
           var monthnames: string[] = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]; // wanderte in chat-history
@@ -66,10 +67,10 @@ export class ChatHistoryComponent implements DoCheck {
               console.log('Check history element ' + i);
               var dt = new Date(response[i].date); // Jedes Mal mit dem Datum des Beitrags initialisiert
               this.nickName = response[i].nickname;
-              this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
+              this.tstamp = dt.getDate() + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
               // Hier findet die Montage des Textes statt.
-              response[i].date = this.tstamp; // Formatierten Timestamp übergeben
+              response[i].dateFormatted = this.tstamp; // Formatierten Timestamp übergeben
 
               if (this.nickName == this.pService.myNickname) {
                 response[i].position = "right";
@@ -106,7 +107,10 @@ export class ChatHistoryComponent implements DoCheck {
                 this.content.push(response[i]);
               }
               dt = null; // Versuch, ein Speicherloch zu verhindern. gup
+
+              // Buchhaltung aufaddieren (Schleifenzähler und Counter)
               i++;
+              this.msgCounter=response[i].counter;
 
               // Array auf definierten Wert kürzen
               if (this.content.length > this.historyLength) {
@@ -127,7 +131,8 @@ export class ChatHistoryComponent implements DoCheck {
 
   @Input()
   set chatHistory(chatMsgObj: Message) {
-    console.log('chat-history: @Input starts');
+    console.log('chat-history: @Input starts. Empfange Counter ' + chatMsgObj.counter);
+    this.msgCounter = chatMsgObj.counter; // In der Instanz speichern
     /*
     // Der Mechanismus mit dem Input der Komponente wird grundsätzlich beibehalten. So wird schon mal jedes Mal dann die History aktuell, wenn der Anwender einen Beitrag schreibt
     // Hier wird der neue Beitrag auf den REST-Server hochgeladen
