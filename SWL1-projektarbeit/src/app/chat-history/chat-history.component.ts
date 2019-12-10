@@ -2,6 +2,7 @@ import { Component, DoCheck, Input, Output, EventEmitter, OnInit } from '@angula
 //import { AppComponent } from '../app.component';
 import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
+import { NicklistService } from '../nicklist.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
 import { Nickname } from '../nickname'
@@ -16,7 +17,7 @@ import { stringify } from 'querystring'; // Wohl jetzt überflüssig, weil nicht
 
 export class ChatHistoryComponent implements DoCheck {
 
-  constructor(public cService: ConfigurationService, public chatService: ChatserverService, public pService: PersonService, ) { }
+  constructor(public cService: ConfigurationService, public chatService: ChatserverService, public pService: PersonService, public nService: NicklistService ) { }
 
   ngOnInit() {
     setInterval(() => {
@@ -171,7 +172,8 @@ export class ChatHistoryComponent implements DoCheck {
           // Jetzt muss noch irgendwie die Nick-Liste rüber in die main-Komponente, um die aktuellen Nicknames zu ermitteln. Das ist jetzt ein Problem...
           // Nickliste in main-Komponente reinbekommen
           this.nickList.forEach(value => {console.log('chat-history Nickliste: ' + value.name + ' * ');});
-          this.nickListChange.emit(this.nickList);
+          this.nickListChange.emit(this.nickList); // wahrscheinlich überflüssig. Schickt zwar die Daten, aber das Binding aktualisiert sie nie
+          this.nService.setNicklist(this.nickList);
         }
       )
     }

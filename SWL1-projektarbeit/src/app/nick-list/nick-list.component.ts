@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Nickname } from '../nickname'
+import { NicklistService } from '../nicklist.service';
 import { stringify } from 'querystring'; // Wohl jetzt überflüssig, weil nicht mehr mit <string> gearbeitet wird
 
 
@@ -10,9 +11,10 @@ import { stringify } from 'querystring'; // Wohl jetzt überflüssig, weil nicht
 })
 export class NickListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public nService: NicklistService) { }
 
   activeNicks: String[] = [];
+  activeNicksArray: Nickname[] = [];
 
   ngOnInit() {
     setInterval(() => {
@@ -23,13 +25,22 @@ export class NickListComponent implements OnInit {
   updateNicks()
   {
     // Wie's aussieht müssen wir das auch noch in einen Service speichern und von dort pollen
-    console.log('polling for nicks');
-    this.activeNicks = this.activeNicks.sort();
+    console.log('polling for new nicks');
+    // Hier kann man die Liste noch verschönern und es wird eine Stringliste draus gemacht, weil es sonst wieder Probleme gibt mit Sortieren
+    this.activeNicks = []; // Array leeren (Ginge eleganter, wenn man unten updatet statt pushed)
+    this.activeNicksArray = this.nService.getNicklist();
+    this.activeNicksArray.forEach(value => {
+      if (value.active) {
+        this.activeNicks.push(value.name);
+        this.activeNicks = this.activeNicks.sort();
+      }
+    });
   }
 
   @Input() 
   set nickObj(activeNicks: Nickname[]) {
     // Hier kann man die Liste noch verschönern und es wird eine Stringliste draus gemacht, weil es sonst wieder Probleme gibt mit Sortieren
+    // Diese Variante ist initial noch nett, scheint aber später einfach nicht mehr aktualisiert zu werden. Das Binding haut irgendwie nicht hin.
     activeNicks.forEach(value => {
       if (value.active) {
         this.activeNicks.push(value.name);
