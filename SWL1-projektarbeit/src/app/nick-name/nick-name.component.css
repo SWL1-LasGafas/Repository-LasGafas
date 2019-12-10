@@ -34,15 +34,9 @@
 
 h1 {
     position: relative;
-    top: 230px;
+    top: 220px;
     font-size: 20px;
     color: rgba(200, 65, 40, 1);
-}
-
-#chatuser {
-    position: relative;
-    color: black;
-    top: 270px;
 }
 
 @media (max-width: 400px) {
