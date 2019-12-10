@@ -47,7 +47,7 @@ export class MainComponent implements OnInit {
       }
       else if (this.pService.myOldNickname == this.pService.myNickname) { // Nur in diesem Fall braucht es eine Fehlermeldung
         console.log('Nickname-Change nicht gemeldet!');
-        this.errorMsg = 'Neuer Nickname identisch mit altem Nickname. Nichts geändert!'; 
+        this.errorMsg = 'Nickname identisch... keine Änderung'; 
       }
       else {
         console.log('Erster Nickname überhaupt')

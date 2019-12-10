@@ -238,6 +238,7 @@
     
     .left {
         float: left;
+        font-size: 9pt;
         border-radius: 5px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
@@ -252,6 +253,7 @@
     
     .right {
         float: right;
+        font-size: 9pt;
         border-radius: 5px;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
@@ -269,6 +271,7 @@
         position: relative;
         left: 25%;
         color: black;
+        font-size: 10pt;
         background-color: lightgray;
         border-radius: 5px;
         padding-top: 3px;
