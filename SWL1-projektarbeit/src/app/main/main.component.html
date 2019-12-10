@@ -6,7 +6,9 @@
                     <app-nick-name (nickNameChange)="nickChange($event)"></app-nick-name>
                     <!-- Zwei Events gehen nicht. Nimmt nur das erste. -->
                     <div id="errorMessage">{{errorMsg}}</div>
-                    <app-nick-list ></app-nick-list>
+                    <div>
+                        <app-nick-list></app-nick-list>
+                    </div>
                 </div>
 
                 <div id="mainchatbereich" class="col-xs-12 col-sm-9 col-lg-10 col-xl-10" style="white-space: pre-line">
