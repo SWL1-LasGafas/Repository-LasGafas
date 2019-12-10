@@ -67,10 +67,10 @@ export class ChatHistoryComponent implements DoCheck {
               console.log('Check history element ' + i);
               var dt = new Date(response[i].date); // Jedes Mal mit dem Datum des Beitrags initialisiert
               this.nickName = response[i].nickname;
-              this.tstamp = this.pad(dt.getDate(), 1) + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
+              this.tstamp = dt.getDate() + '. ' + monthnames[dt.getMonth()] + ' ' + dt.getFullYear() + ', ' + this.pad(dt.getHours(), 2) + ':' + this.pad(dt.getMinutes(), 2) + ' Uhr'; //Hier wird das Datum formatiert. Layout nach Wunsch des Kunden (2. Dez 2019)
 
               // Hier findet die Montage des Textes statt.
-              response[i].date = this.tstamp; // Formatierten Timestamp übergeben
+              response[i].dateFormatted = this.tstamp; // Formatierten Timestamp übergeben
 
               if (this.nickName == this.pService.myNickname) {
                 response[i].position = "right";
