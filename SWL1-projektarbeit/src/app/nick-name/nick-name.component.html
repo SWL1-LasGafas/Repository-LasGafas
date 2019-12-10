@@ -1,16 +1,22 @@
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
-        <div id="nickNameTitle" class="col-xs-3 col-sm-12">
-            <p>Nickname setzen!</p>
-        </div>
-        <div class="col-xs-6 col-sm-12">
-            <input [(ngModel)]="nickName" type="text" id="inputNickname" minlenght=4 maxlength="10"
+        <div class="col-12">
+            <input [(ngModel)]="nickName" type="text" id="inputNickname" placeholder="Nickname" minlenght=4 maxlength="10"
                 (keyup.enter)="setNickname()" required />
         </div>
-        <div class="col-xs-3 col-sm-12">
+        <div class="col-12">
             <button type="button" id="nickNameButton" class="btn btn-outline-danger" (click)="setNickname()"
                 value="Setzen" [disabled]="!nickName">Setzen</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="chatroom" class="col-12">
+            <h1>Im Chat:</h1>
+        </div>
+        <div id="chatuser">
+            chatuser anzeigen <!-- funktion chatuser einfügen -->
         </div>
     </div>
 </div>
