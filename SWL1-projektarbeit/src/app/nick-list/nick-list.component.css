@@ -1,0 +1,8 @@
+.nickList {
+    background-color:red;
+    border:5px,black,solid;
+    position: absolute;
+    top: 400px;
+    width: 200px;
+    height: 200px;
+}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
+import { Nickname } from '../nickname'
+
 
 @Component({
   selector: 'app-main',
@@ -18,6 +20,8 @@ export class MainComponent implements OnInit {
   nickName: string = "";
   nickSet: boolean = false;
   errorMsg: string = '';
+
+  nickObj: Nickname = new Nickname();
 
   ngOnInit() {
   }
@@ -44,14 +48,29 @@ export class MainComponent implements OnInit {
         console.log("Nick gesetzt und OK!");
         this.systemMsg("** " + this.pService.myOldNickname + " ändert Nickname auf " + this.pService.myNickname + " **");
         this.errorMsg = '';
+
+        console.log('Nickname-Objekt '+this.pService.myNickname+' gesendet');
+        // fügt den neuen Nick gleich mal in die Komponente nick-list ein
+        var dt=new Date();
+        this.nickObj.name=this.pService.myNickname;
+        this.nickObj.enterdate=dt.getTime();
+        this.nickObj.active=true;
       }
       else if (this.pService.myOldNickname == this.pService.myNickname) { // Nur in diesem Fall braucht es eine Fehlermeldung
         console.log('Nickname-Change nicht gemeldet!');
         this.errorMsg = 'Nickname identisch... keine Änderung'; 
       }
       else {
-        console.log('Erster Nickname überhaupt')
+        console.log('Erster Nickname überhaupt');
         this.systemMsg("** " + this.pService.myNickname + " hat den Chat betreten! **");
+        console.log('Nickname-Objekt '+this.pService.myNickname+' gesendet');
+        // fügt den neuen Nick gleich mal in die Komponente nick-list ein
+        var dt=new Date();
+        this.nickObj.name=this.pService.myNickname;
+        this.nickObj.enterdate=dt.getTime();
+        this.nickObj.active=true;
+
+        //allfällige Fehlermeldungen löschen
         this.errorMsg = '';
       }
       this.nickSet = true;
