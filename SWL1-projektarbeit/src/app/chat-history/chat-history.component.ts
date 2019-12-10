@@ -4,6 +4,7 @@ import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
 import { ChatserverService } from '../chatserver.service';
 import { Message } from '../message'
+import { Nickname } from '../nickname'
 import { stringify } from 'querystring'; // Wohl jetzt überflüssig, weil nicht mehr mit <string> gearbeitet wird
 
 @Component({
@@ -32,6 +33,10 @@ export class ChatHistoryComponent implements DoCheck {
   color: string;
   public hashlist: string[] = [];
   msgCounter:number = 0; // Ungefährer Stand des Messagecounters. Könnte auch durch Durchzählen des lokalen Arrays ermittelt werden, aber wird jetzt mal durch chat-bar beim Speichern übergeben.
+
+  // Nickname Objekte zusammenbauen
+  nickObj:Nickname = new Nickname(); // Einzelnes Objekt
+  nickList:Nickname[] = []; // Array, das dann irgendwie in die main-Komponente rein muss
 
   scrollTop() {
     console.log("Scrolling down");
@@ -106,6 +111,44 @@ export class ChatHistoryComponent implements DoCheck {
                 //this.content.push('<span class="'+nickClass[nickIndex]+'"><strong>' + this.nickName + "</strong></span>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tstamp"><small>' + this.tstamp + '</small></span>' + this.newline + '<span class="chatText">' + response[i].message + '</span>' + this.newline);
                 this.content.push(response[i]);
               }
+
+              // Nickname-Liste zusammenbauen. Am Ende sollte jeder Nick nur einmal drin sein.
+              if (response[i].nickname) { //Keine Systemmeldungen u.ä. mit einpflegen!
+                var dt = new Date();
+                var indx = this.nickList.findIndex(myObj => myObj.name = response[i].nickname); // prüfen, ob es den Nick schon gibt
+                if (indx > -1) { // Nickname ist vorhanden. Nur updaten!
+                  if (response[i].date > dt.getTime() - this.cService.nickTimeout) // Neuer als 30 Minuten
+                  {
+                    console.log('chat-history: Nickname ' + this.nickList[indx].name + ' ist aktiv.');
+                    this.nickList[indx].active = true; // Aktiv setzen
+                  }
+                  else {
+                    console.log('chat-history: Nickname ' + this.nickList[indx].name + ' ist inaktiv.');
+                    this.nickList[indx].active = true; // Inaktiv setzen
+                  }
+                  console.log('chat-history: ' + this.nickList[indx].name + ' in Nickliste geändert.');
+                }
+                else { // Noch nicht vorhanden. Objekt erstellen und einfügen
+                  this.nickObj = new Nickname(); // Initialisieren
+                  this.nickObj.name = response[i].nickname;
+                  if (response[i].date > dt.getTime() - this.cService.nickTimeout) // Neuer als 30 Minuten
+                  {
+                    console.log('chat-history: Nickname ' + this.nickObj.name + ' ist aktiv.');
+                    this.nickObj.active = true; // Aktiv setzen, wenn Beitrag neuer als 30 min.
+                  }
+                  else {
+                    console.log('chat-history: Nickname ' + this.nickObj.name + ' ist inaktiv.');
+                    this.nickObj.active = false; // inaktiv setzen, wenn Beitrag älter als 30 min.
+                  }
+                  // this.nickObj.enterdate = response[i].date; // Der Wert ist ungenau, da er sich nur auf die im Array vorhandenen Beiträge bezieht und zudem das neuste Datum haben wird statt dem ältesten
+                  console.log('chat-history: ' + this.nickObj.name + ' in Nickliste eingefügt.');
+                  this.nickList.push(this.nickObj);
+                }
+              }
+              else {
+                console.log('chat-history: Systemmeldung o.ä. ohne Nickname');
+              }
+
               dt = null; // Versuch, ein Speicherloch zu verhindern. gup
 
               // Buchhaltung aufaddieren (Schleifenzähler und Counter)
@@ -117,12 +160,13 @@ export class ChatHistoryComponent implements DoCheck {
                 console.log('History gekürzt von ' + this.content.length + ' auf ' + this.historyLength + ' Elemente')
                 this.content.shift(); // Problem: Es muss evtl. viel mehr gekürzt werden, weil das Array viel länger ist. TODO! 
               }
-
             }
           }
           catch {
             // Eigentlich nur gebaut, um den Fehler wegen leerem date herauszubekommen gup
           }
+          // Jetzt muss noch irgendwie die Nick-Liste rüber in die main-Komponente, um die aktuellen Nicknames zu ermitteln. Das ist jetzt ein Problem...
+          // TODO: Nickliste in main-Komponente reinbekommen
         }
       )
     }
