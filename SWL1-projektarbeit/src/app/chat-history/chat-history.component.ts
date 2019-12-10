@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, Output, EventEmitter, OnInit } from '@angular/core';
 //import { AppComponent } from '../app.component';
 import { ConfigurationService } from '../configuration.service';
 import { PersonService } from '../person.service';
@@ -36,7 +36,7 @@ export class ChatHistoryComponent implements DoCheck {
 
   // Nickname Objekte zusammenbauen
   nickObj:Nickname = new Nickname(); // Einzelnes Objekt
-  nickList:Nickname[] = []; // Array, das dann irgendwie in die main-Komponente rein muss
+  public nickList:Nickname[] = []; // Array, das dann irgendwie in die main-Komponente rein muss
 
   scrollTop() {
     console.log("Scrolling down");
@@ -115,7 +115,7 @@ export class ChatHistoryComponent implements DoCheck {
               // Nickname-Liste zusammenbauen. Am Ende sollte jeder Nick nur einmal drin sein.
               if (response[i].nickname) { //Keine Systemmeldungen u.ä. mit einpflegen!
                 var dt = new Date();
-                var indx = this.nickList.findIndex(myObj => myObj.name = response[i].nickname); // prüfen, ob es den Nick schon gibt
+                var indx = this.nickList.findIndex(myObj => myObj.name == response[i].nickname); // prüfen, ob es den Nick schon gibt
                 if (indx > -1) { // Nickname ist vorhanden. Nur updaten!
                   if (response[i].date > dt.getTime() - this.cService.nickTimeout) // Neuer als 30 Minuten
                   {
@@ -148,6 +148,9 @@ export class ChatHistoryComponent implements DoCheck {
               else {
                 console.log('chat-history: Systemmeldung o.ä. ohne Nickname');
               }
+              
+              // DEBUG
+              // this.nickList.forEach(value => {console.log('chat-history Nickliste: ' + value.name + ' * ');});
 
               dt = null; // Versuch, ein Speicherloch zu verhindern. gup
 
@@ -166,7 +169,9 @@ export class ChatHistoryComponent implements DoCheck {
             // Eigentlich nur gebaut, um den Fehler wegen leerem date herauszubekommen gup
           }
           // Jetzt muss noch irgendwie die Nick-Liste rüber in die main-Komponente, um die aktuellen Nicknames zu ermitteln. Das ist jetzt ein Problem...
-          // TODO: Nickliste in main-Komponente reinbekommen
+          // Nickliste in main-Komponente reinbekommen
+          this.nickList.forEach(value => {console.log('chat-history Nickliste: ' + value.name + ' * ');});
+          this.nickListChange.emit(this.nickList);
         }
       )
     }
@@ -190,10 +195,10 @@ export class ChatHistoryComponent implements DoCheck {
       console.log('Ende schreiben History...');
     }
     */
-
-
-
   }
+
+  @Output()
+  nickListChange = new EventEmitter<Nickname[]>();
 
   ngDoCheck() {
     this.scrollTop();  // Verhalten etwas suboptimal, weil es jetzt bei jedem einzelnen Tastendruck im Eingabefeld scrollt. Aber es scrollt, immerhin. Und es ist sogar ein Ergänzung zum CSS Scrolling

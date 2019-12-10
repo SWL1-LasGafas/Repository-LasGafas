@@ -83,6 +83,12 @@ export class MainComponent implements OnInit {
     }
   }
 
+  nickListSend(liste: Nickname []) {
+    console.log('main: nickListChange aufgerufen!');
+    this.nickList=liste;
+    liste.forEach(value => {console.log(value.name)});
+  }
+
   chatMsg(event: any): void {
     if (event) // Unklar, wieso ein "undefined"-Objekt hier beim Start übergeben wird. Bringt aber auf jeden Fall nicht viel ausser Fehlermeldungen.
     {
