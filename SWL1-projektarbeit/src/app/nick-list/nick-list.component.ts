@@ -12,14 +12,30 @@ export class NickListComponent implements OnInit {
 
   constructor() { }
 
-  activeNicks: Nickname[]=[];
+  activeNicks: String[] = [];
 
   ngOnInit() {
+    setInterval(() => {
+      this.updateNicks();
+    }, 5000); // Polling
+  }
+
+  updateNicks()
+  {
+    // Wie's aussieht müssen wir das auch noch in einen Service speichern und von dort pollen
+    console.log('polling for nicks');
+    this.activeNicks = this.activeNicks.sort();
   }
 
   @Input() 
   set nickObj(activeNicks: Nickname[]) {
-    this.activeNicks=activeNicks;
+    // Hier kann man die Liste noch verschönern und es wird eine Stringliste draus gemacht, weil es sonst wieder Probleme gibt mit Sortieren
+    activeNicks.forEach(value => {
+      if (value.active) {
+        this.activeNicks.push(value.name);
+        this.activeNicks = this.activeNicks.sort();
+      }
+    });
 
     // Ziel wäre gewesen, das Array hier zusammenzubauen. Aber das wollte einfach nicht funktionieren. Jetzt liefert das halt die main-Komponente fertig an.
 /*    if (nickListObj.name != '') { // Irgendwie landet immer erst mal ein leeres Objekt hier, das man abblocken muss 

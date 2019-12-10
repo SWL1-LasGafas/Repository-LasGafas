@@ -86,7 +86,8 @@ export class MainComponent implements OnInit {
   nickListSend(liste: Nickname []) {
     console.log('main: nickListChange aufgerufen!');
     this.nickList=liste;
-    liste.forEach(value => {console.log(value.name)});
+    // DEBUG
+    liste.forEach(value => {console.log(value.name + ' ist ' + value.active);}); 
   }
 
   chatMsg(event: any): void {
