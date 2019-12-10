@@ -22,6 +22,7 @@ export class MainComponent implements OnInit {
   errorMsg: string = '';
 
   nickObj: Nickname = new Nickname();
+  nickList: Nickname[] = [];
 
   ngOnInit() {
   }
@@ -49,12 +50,12 @@ export class MainComponent implements OnInit {
         this.systemMsg("** " + this.pService.myOldNickname + " ändert Nickname auf " + this.pService.myNickname + " **");
         this.errorMsg = '';
 
-        console.log('Nickname-Objekt '+this.pService.myNickname+' gesendet');
-        // fügt den neuen Nick gleich mal in die Komponente nick-list ein
+        console.log('Nickname-Objekt '+this.pService.myOldNickname+' geändert');
+
+        // Ändert den Nickname in der Nick-Liste
         var dt=new Date();
-        this.nickObj.name=this.pService.myNickname;
-        this.nickObj.enterdate=dt.getTime();
-        this.nickObj.active=true;
+        var indx=this.nickList.findIndex(myObj => myObj.name=this.pService.myOldNickname);
+        this.nickList[indx].name=this.pService.myNickname;
       }
       else if (this.pService.myOldNickname == this.pService.myNickname) { // Nur in diesem Fall braucht es eine Fehlermeldung
         console.log('Nickname-Change nicht gemeldet!');
@@ -63,12 +64,13 @@ export class MainComponent implements OnInit {
       else {
         console.log('Erster Nickname überhaupt');
         this.systemMsg("** " + this.pService.myNickname + " hat den Chat betreten! **");
-        console.log('Nickname-Objekt '+this.pService.myNickname+' gesendet');
+        console.log('Nickname-Objekt '+this.pService.myNickname+' erstellt');
         // fügt den neuen Nick gleich mal in die Komponente nick-list ein
         var dt=new Date();
         this.nickObj.name=this.pService.myNickname;
         this.nickObj.enterdate=dt.getTime();
         this.nickObj.active=true;
+        this.nickList.push(this.nickObj);
 
         //allfällige Fehlermeldungen löschen
         this.errorMsg = '';

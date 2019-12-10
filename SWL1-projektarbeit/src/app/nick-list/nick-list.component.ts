@@ -12,22 +12,23 @@ export class NickListComponent implements OnInit {
 
   constructor() { }
 
-  activeNicks:Nickname[]=[];
+  activeNicks: Nickname[]=[];
 
   ngOnInit() {
   }
 
   @Input() 
-  set nickObj(nickListObj: Nickname) {
-//    if (nickListObj.name != '') { // Irgendwie landet immer erst mal ein leeres Objekt hier, das man abblocken muss
+  set nickObj(activeNicks: Nickname[]) {
+    this.activeNicks=activeNicks;
+
+    // Ziel wäre gewesen, das Array hier zusammenzubauen. Aber das wollte einfach nicht funktionieren. Jetzt liefert das halt die main-Komponente fertig an.
+/*    if (nickListObj.name != '') { // Irgendwie landet immer erst mal ein leeres Objekt hier, das man abblocken muss 
       console.log('nick-list: ' + nickListObj.name + ' in Liste eingefügt');
-      this.activeNicks.push(nickListObj);
+      this.=nickListObj; // Das ist zwar falsch, funktioniert aber
       console.log('Nick-Array: '+this.activeNicks.toString());
-//    }
+    }
 /*    else {
       console.log('nick-list: leeres Objekt ignoriert: '+nickListObj.name);
     } */
   }
-
-
 }
