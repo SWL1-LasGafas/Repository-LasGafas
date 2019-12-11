@@ -1,8 +1,8 @@
 
-.container-fluid {
+.chatarea {
 
-    position: fixed;
-    top: 130px;
+    position: relative;
+    top: 0px;
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
@@ -33,12 +33,50 @@
 }
 
 #errorMessage {
-    position: fixed;
+    position: relative;
     top: 270px;
     max-width: 120px;
     color: rgba(200, 65, 40, 1);
     font-size: 15px;
     word-wrap: break-word;
+}
+
+#footertext {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0px;
+}
+
+@media (min-height: 800px) {
+
+    #mainchatbereich {
+        position: relative;
+        box-sizing: border-box;
+        top: 0px;
+        width: 100%;
+        height: 650px;
+        max-height: 700px;   
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: rgba(200, 65, 40, 1);
+        border-radius: 5px;
+    }
+}
+
+@media (min-height: 1000px) {
+
+    #mainchatbereich {
+        position: relative;
+        box-sizing: border-box;
+        top: 0px;
+        width: 100%;
+        height: 800px;
+        max-height: 850px;   
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: rgba(200, 65, 40, 1);
+        border-radius: 5px;
+    }
 }
 
 @media (max-width: 400px) {
