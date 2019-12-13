@@ -37,8 +37,8 @@
 
 #errorMessage {
     position: relative;
-    top: 0px;
-    right: 0px;
+    top: -10px;
+    left: 20%;
     max-width: 100px;
     color: white;
     font-size: 12px;
